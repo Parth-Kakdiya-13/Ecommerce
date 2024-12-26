@@ -10,12 +10,11 @@ const productrout = require('./routes/product.route')
 
 const app = express();
 app.use(express.json());
-app.use(cors());
-// {
-//     origin: ["https://ecommerce-one-theta-45.vercel.app/"],
-//     methods: ["POST", "GET"],
-//     credentials: true
-// }
+app.use(cors({
+    origin: ["https://ecommerce-one-theta-45.vercel.app/"],
+    methods: ["POST", "GET"],
+    credentials: true
+}));
 app.use(bodyParser.urlencoded({ extended: false }))
 
 
