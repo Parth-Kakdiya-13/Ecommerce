@@ -8,7 +8,7 @@ export const ListedItems = () => {
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const response = await axios.get('http://localhost:5959/retrive');
+                const response = await axios.get('https://ecommerce-w2el.vercel.app/retrive');
                 setItems(response.data.data);
             } catch (err) {
                 setError('Failed to fetch items');

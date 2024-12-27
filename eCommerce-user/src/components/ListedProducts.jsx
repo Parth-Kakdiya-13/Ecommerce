@@ -10,7 +10,7 @@ export const ListedProducts = () => {
     useEffect(() => {
         async function getDataHandler() {
             try {
-                const response = await axios.get('http://localhost:5959/retrive')
+                const response = await axios.get('https://ecommerce-w2el.vercel.app/retrive')
                 setData(response.data.data)
 
             } catch (err) {
