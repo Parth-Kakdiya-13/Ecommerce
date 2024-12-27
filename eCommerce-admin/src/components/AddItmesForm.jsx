@@ -46,7 +46,7 @@ export const AddItmesForm = () => {
         formData.append("image", data.image); // Add image to formData
 
         try {
-            await axios.post("http://localhost:5959/create", formData, {
+            await axios.post("https://ecommerce-w2el.vercel.app/create", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data", // Ensure proper headers for file upload
                 },
