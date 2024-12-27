@@ -23,7 +23,7 @@ mongoose.connect(mongoURI)
 
 
 app.get('/', (req, res) => {
-    res.json("hello")
+    res.json("hello");
 })
 app.use('/', productrout)
 
