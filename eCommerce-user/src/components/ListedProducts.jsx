@@ -25,7 +25,7 @@ export const ListedProducts = () => {
     return (
         <div className='mt-10'>
             {error && <p>{error}</p>}
-            <div className="flex flex-wrap gap-4 mx-10">
+            <div className="flex flex-wrap gap-4 mx-10 justify-center">
                 {data.length > 0 ? (
                     data.map((list, index) => (
                         <div
