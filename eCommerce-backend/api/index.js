@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 const allowedOrigins = [
     'https://ecommerce-one-pi-90.vercel.app',
-    'https://ecommerce-syby.vercel.app',
+    'https://ecommerce-v36f.vercel.app/',
     'https://ecommerce-w2el.vercel.app'
 ];
 
