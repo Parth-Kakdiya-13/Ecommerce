@@ -44,6 +44,12 @@ mongoose.connect(mongoURI)
 app.get('/', (req, res) => {
     res.json("hello");
 })
+app.get('/addproduct', () => {
+    res.json("addproduct")
+})
+app.get('/shop', () => {
+    res.json("shop")
+})
 app.use('/', productrout)
 
 
