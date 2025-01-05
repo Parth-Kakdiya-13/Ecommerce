@@ -19,7 +19,8 @@ mongoose.connect(mongoURI)
 const allowedOrigins = [
     'https://ecommerce-one-pi-90.vercel.app',
     'https://ecommerce-v36f.vercel.app',
-    "http://localhost:5173"
+    "http://localhost:5173",
+    "http://localhost:5174"
 ];
 app.use(cors({
     origin: function (origin, callback) {

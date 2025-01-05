@@ -1,6 +1,7 @@
 import React from 'react';
 import necless from '../assets/product0.webp'
 import { Services } from './Services';
+import { Products } from './Products';
 
 export const HomePage = () => {
     return (
@@ -16,6 +17,7 @@ export const HomePage = () => {
                 <img src={necless} className='max-md:w-1/3 max-sm:w-1/2' />
             </div>
             <Services />
+            <Products />
         </div>
     )
 }

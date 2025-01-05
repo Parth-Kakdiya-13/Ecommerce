@@ -5,6 +5,7 @@ import { NavigationBar } from './components/NavigationBar'
 import { HomePage } from './components/HomePage'
 import { Cart } from './components/Cart'
 import { About } from './components/About'
+import { CartContextProvider } from './store/CartContext'
 
 function App() {
 
@@ -21,7 +22,9 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router}></RouterProvider>
+      <CartContextProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </CartContextProvider>
     </>
   )
 }

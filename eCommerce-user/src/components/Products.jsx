@@ -1,20 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button } from './Button';
-import { CartContext } from '../store/CartContext';
+Button
 
+export const Products = () => {
 
-export const ListedProducts = () => {
 
     const [data, setData] = useState([]);
     const [error, setError] = useState('')
-
-    const ctx = useContext(CartContext)
-
-    function addItemsToCart(list) {
-        ctx.addItems(list)
-    }
-
 
     useEffect(() => {
         async function getDataHandler() {
@@ -30,32 +23,34 @@ export const ListedProducts = () => {
         getDataHandler()
     }, [])
 
-
     return (
-        <div className='mt-10'>
-            {error && <p>{error}</p>}
-            <div className="flex flex-wrap gap-4 mx-10 justify-center">
+        <div className=' mt-10 '>
+            <div>
+                <h2 className='uppercase text-yellow-500 text-center'>exlpore the awsome</h2>
+                <h1 className='capitalize text-5xl font-thin text-center'>various products</h1>
+            </div>
+            <div className="grid grid-cols-4 gap-4 px-36 mt-10 ">
                 {error && <p className='text-red-500'>{error}</p>}
                 {data.length > 0 ? (
                     data.map((list, index) => (
                         <div
                             key={index}
-                            className="flex flex-col items-start border p-4 rounded shadow-md w-fit h-fix"
+                            className="flex flex-col items-start border rounded shadow-md w-fix h-fix"
                         >
                             {list.image ? (
                                 <img
                                     src={`data:image/jpeg;base64,${list.image}`}
                                     alt={list.title}
-                                    className="w-48 h-48 object-cover mb-4"
+                                    className="w-full h-48 object-cover mb-4"
                                 />
                             ) : (
                                 <p className="text-gray-500">No image available</p>
                             )}
                             <div className='flex flex-col items-start w-full h-full p-4'>
                                 <h2 className="font-semibold">{list.title}</h2>
-                                <p className='capitalize  w-48'>{list.description}</p>
+                                <p className='capitalize w-48'>{list.description}</p>
                                 <p className="text-green-600 font-bold py-2">Rs.{list.price}</p>
-                                <Button className="capitalize" onClick={() => addItemsToCart(list)}>add to cart</Button>
+                                <Button>More details</Button>
                             </div>
                         </div>
                     ))
