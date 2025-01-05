@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 export const ListedItems = () => {
     const [items, setItems] = useState([]);
     const [error, setError] = useState('');
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -18,7 +21,30 @@ export const ListedItems = () => {
         fetchItems();
     }, []);
 
-    console.log(items);
+
+
+    function editHandler(id) {
+        navigate(`/edit/${id}`)
+    }
+
+    async function deleteHandler(id) {
+        try {
+            const response = await axios.get(`https://ecommerce-o1ub.vercel.app/delete/${id}`);
+            console.log(response);
+
+            if (response.status == 200) {
+                alert("data deleted successfully")
+            } else {
+                alert("data not deleted")
+            }
+        } catch (err) {
+            alert(err)
+            console.log(err);
+        }
+        navigate('/')
+    }
+
+
 
     return (
         <div>
@@ -42,6 +68,10 @@ export const ListedItems = () => {
                             <h2 className="font-semibold">{list.title}</h2>
                             <p className='w-48 capitalize'>{list.description}</p>
                             <p className="text-green-600 font-bold">${list.price}</p>
+                            <div className='flex items-center justify-between mt-auto pt-5'>
+                                <button type='button' className='capitalize px-5 rounded-md bg-black text-blue-500' onClick={() => editHandler(list._id)}>Edit</button>
+                                <button type='button' className='capitalize px-5 rounded-md bg-black text-red-500' onClick={() => deleteHandler(list._id)}>delete</button>
+                            </div>
                         </div>
                     ))
                 ) : (

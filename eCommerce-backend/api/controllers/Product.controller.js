@@ -21,11 +21,40 @@ exports.store = async (req, res) => {
 }
 
 
-exports.get = async (req, res) => {
+exports.getAll = async (req, res) => {
     try {
         let data = await ProductModel.find();
         res.status(200).send({ "data": data })
     } catch (error) {
         res.status(500).send({ "error": error.message })
+    }
+}
+
+exports.get = async (req, res) => {
+    try {
+        const productId = req.params.id;
+        const product = await ProductModel.findById(productId);
+        if (!product) {
+            return res.status(404).json({ error: "Product not found" });
+        }
+        res.status(200).json(product);
+    } catch (error) {
+        console.error("Error fetching product:", error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.delete = async (req, res) => {
+    try {
+        const productId = req.params.id;
+        console.log(productId);
+
+        const product = await ProductModel.findByIdAndDelete(productId)
+        if (!product) {
+            return res.status(404).json({ error: "Product not deleted" });
+        }
+        res.status(200).json({ "message": "product deleted" });
+    } catch (err) {
+        res.status(500).json({ "error": err.message })
     }
 }

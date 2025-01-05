@@ -7,8 +7,10 @@ const storage = multer.memoryStorage(); // Store file in memory
 const upload = multer({ storage });
 
 
-router.post('/create', upload.single('image'), productController.store)
-router.get('/retrive', productController.get)
+router.post('/create', upload.single('image'), productController.store);
+router.get('/retrive', productController.getAll);
+router.get('/edit/:id', productController.get);
+router.get('/delete/:id', productController.delete)
 
 
 
