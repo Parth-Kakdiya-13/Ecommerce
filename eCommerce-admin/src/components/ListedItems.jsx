@@ -29,7 +29,7 @@ export const ListedItems = () => {
 
     async function deleteHandler(id) {
         try {
-            const response = await axios.get(`https://ecommerce-o1ub.vercel.app/delete/${id}`);
+            const response = await axios.delete(`https://ecommerce-o1ub.vercel.app/delete/${id}`);
             console.log(response);
 
             if (response.status == 200) {
