@@ -3,66 +3,168 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
 export const EditPage = () => {
-
-    const [product, setProduct] = useState([])
-    const navigate = useNavigate()
+    const [product, setProduct] = useState({
+        title: '',
+        description: '',
+        price: '',
+        image: null, // Store the file object
+    });
+    const [previewImage, setPreviewImage] = useState(null); // For previewing the uploaded image
+    const navigate = useNavigate();
     const { id } = useParams();
 
+    // Fetch the product details
     useEffect(() => {
-        const fetchItems = async () => {
+        const fetchItem = async () => {
             try {
                 const response = await axios.get(`https://ecommerce-o1ub.vercel.app/edit/${id}`);
-                console.log(response);
-
-                setProduct(response.data)
+                setProduct(response.data);
+                if (response.data.image) {
+                    setPreviewImage(`data:image/jpeg;base64,${response.data.image}`); // Set initial preview
+                }
             } catch (err) {
-                // setError('Failed to fetch items');
-                console.log(err);
+                console.error('Failed to fetch product:', err);
             }
         };
-        fetchItems();
+        fetchItem();
     }, [id]);
 
-    async function deleteHandler(id) {
-        try {
-            const response = await axios.get(`https://ecommerce-o1ub.vercel.app/delete/${id}`);
-            console.log(response);
-
-            if (response.status == 200) {
-                alert("data deleted successfully")
-            } else {
-                alert("data not deleted")
-            }
-        } catch (err) {
-            alert(err)
-            console.log(err);
-        }
-        navigate('/listedproducts')
+    // Handle input changes
+    function changeHandler(event) {
+        const { name, value } = event.target;
+        setProduct((prevProduct) => ({
+            ...prevProduct,
+            [name]: value, // Dynamically update the corresponding field
+        }));
     }
 
+    // Handle image input changes and set preview
+    function imageChangeHandler(event) {
+        const file = event.target.files[0];
+        if (file) {
+            setProduct((prevProduct) => ({
+                ...prevProduct,
+                image: file, // Update image field with the selected file
+            }));
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewImage(reader.result); // Set preview image
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // Handle update
+    async function editHandler() {
+        try {
+            const formData = new FormData();
+            formData.append('title', product.title);
+            formData.append('description', product.description);
+            formData.append('price', product.price);
+            if (product.image) {
+                formData.append('image', product.image); // Add image file if present
+            }
+
+            const response = await axios.put(`https://ecommerce-o1ub.vercel.app/update/${id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            if (response.status === 200) {
+                alert('Data updated successfully');
+                navigate('/'); // Redirect after successful update
+            } else {
+                alert('Failed to update data');
+            }
+        } catch (error) {
+            console.error('Error updating product:', error);
+            alert('An error occurred while updating the product');
+        }
+    }
+
+    // Handle delete
+    async function deleteHandler() {
+        try {
+            const response = await axios.delete(`https://ecommerce-o1ub.vercel.app/delete/${id}`);
+            if (response.status === 200) {
+                alert('Data deleted successfully');
+                navigate('/');
+            } else {
+                alert('Failed to delete data');
+            }
+        } catch (err) {
+            console.error('Error deleting product:', err);
+            alert('An error occurred while deleting the product');
+        }
+    }
 
     return (
         <div>
-            <div
-                key={product._id}
-                className="flex flex-col border p-4 rounded shadow-md w-fit h-fit"
-            >
-                {product.image ? (
+            <div className="flex flex-col border p-4 rounded shadow-md w-fit h-fit">
+                {previewImage ? (
                     <img
-                        src={`data:image/jpeg;base64,${product.image}`}
+                        src={previewImage}
                         alt={product.title}
                         className="w-48 h-48 object-cover mb-4"
                     />
                 ) : (
                     <p className="text-gray-500">No image available</p>
                 )}
-                <h2 className="font-semibold">{product.title}</h2>
-                <p className='w-48 capitalize'>{product.description}</p>
-                <p className="text-green-600 font-bold">${product.price}</p>
-                <div className='flex items-center justify-between mt-auto pt-5'>
-                    <button type='button' className='capitalize px-5 rounded-md bg-black text-red-500' onClick={() => deleteHandler(product._id)}>delete</button>
+
+                <label>
+                    Title:
+                    <input
+                        name="title"
+                        value={product.title}
+                        className="border-2 my-1"
+                        onChange={changeHandler}
+                    />
+                </label>
+                <label>
+                    Description:
+                    <input
+                        name="description"
+                        value={product.description}
+                        className="border-2 my-1"
+                        onChange={changeHandler}
+                    />
+                </label>
+                <label>
+                    Price:
+                    <input
+                        name="price"
+                        value={product.price}
+                        className="border-2 my-1"
+                        onChange={changeHandler}
+                    />
+                </label>
+                <label>
+                    Image:
+                    <input
+                        type="file"
+                        accept="image/*"
+                        className="border-2 my-1"
+                        onChange={imageChangeHandler}
+                    />
+                </label>
+                <div className="flex items-center justify-between mt-auto pt-5">
+                    <button
+                        type="button"
+                        className="capitalize px-5 rounded-md bg-black text-green-500"
+                        onClick={editHandler}
+                    >
+                        Save
+                    </button>
+                    <button
+                        type="button"
+                        className="capitalize px-5 rounded-md bg-black text-red-500"
+                        onClick={deleteHandler}
+                    >
+                        Delete
+                    </button>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};

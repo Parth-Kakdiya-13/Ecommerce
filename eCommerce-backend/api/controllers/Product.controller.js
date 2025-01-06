@@ -58,3 +58,35 @@ exports.delete = async (req, res) => {
         res.status(500).json({ "error": err.message })
     }
 }
+
+exports.update = async (req, res) => {
+    try {
+        const productId = req.params.id;
+
+        const updateData = {
+            title: req.body.title,
+            description: req.body.description,
+            price: req.body.price,
+        };
+
+        // If a new image is uploaded
+        if (req.file) {
+            updateData.image = req.file.buffer.toString('base64'); // Store image as base64 string
+        }
+
+        const updatedProduct = await ProductModel.findByIdAndUpdate(
+            productId,
+            updateData,
+            { new: true } // Return the updated document
+        );
+
+        if (!updatedProduct) {
+            return res.status(404).json({ error: "Product not found" });
+        }
+
+        res.status(200).json(updatedProduct);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
