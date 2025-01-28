@@ -34,7 +34,7 @@ export const Cart = () => {
                             <button className='w-10 bg-yellow-500 rounded-xl flex items-center justify-center' onClick={() => addItemsHandler(list)}>+</button>
                             <button className='w-10 bg-yellow-500 rounded-xl flex items-center justify-center' onClick={() => removeItemsHandler(list._id)}>-</button>
                         </li>
-                        <li><Button className="mt-3">Place Order</Button></li>
+                        <li className='mt-3'><Button>Place Order</Button></li>
                     </ul>
                 })}
             </div>
