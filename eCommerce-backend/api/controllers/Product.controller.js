@@ -30,7 +30,7 @@ exports.getAll = async (req, res) => {
     }
 }
 
-exports.get = async (req, res) => {
+exports.edit = async (req, res) => {
     try {
         const productId = req.params.id;
         const product = await ProductModel.findById(productId);

@@ -2,17 +2,18 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { Button } from './Button';
 import { CartContext } from '../store/CartContext';
-
+import { useNavigate } from 'react-router-dom';
 
 export const ListedProducts = () => {
 
     const [data, setData] = useState([]);
     const [error, setError] = useState('')
-
+    const navigate = useNavigate();
     const ctx = useContext(CartContext)
 
     function addItemsToCart(list) {
-        ctx.addItems(list)
+        ctx.addItems(list);
+        navigate('/cart');
     }
 
 

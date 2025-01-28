@@ -1,69 +1,87 @@
-import { createContext, useState } from "react"
+import { createContext, useState } from "react";
 
-
+// Create the CartContext
 export const CartContext = createContext({
     items: [],
     addItems: () => { },
     removeItems: () => { }
-})
+});
 
+// CartContextProvider component
 export const CartContextProvider = ({ children }) => {
+    const [shoppingCart, setShoppingCart] = useState([]);
 
-    const [shoppingCart, setShoppingCart] = useState({ items: [] });
+    // Handler to add items to the cart
+    const addItemsHandler = (item) => {
+        setShoppingCart((prevState) => {
+            const updatedItems = [...prevState];
 
-    const addItemsHandler = (list) => {
+            // Find the index of the item in the cart
+            const existingCartItemIndex = updatedItems.findIndex(
+                (cartItem) => cartItem._id === item._id
+            );
 
-        setShoppingCart((prestate) => {
-            const updatedItems = [...prestate.items];
-
-            const existingCartItemIndex = updatedItems.findIndex((cartIndex) => {
-                return cartIndex._id === list._id
-            })
-
-            const existingCartItem = updatedItems[existingCartItemIndex]
-            console.log(existingCartItem);
-
-            if (!existingCartItem) {
-                updatedItems.push({
-                    ...list,
-                    quantity: 1
-                })
-            } else {
+            if (existingCartItemIndex !== -1) {
+                // If the item exists, update its quantity
                 const updatedItem = {
-                    ...updatedItems,
-                    quantity: existingCartItem.quantity + 1
+                    ...updatedItems[existingCartItemIndex],
+                    quantity: updatedItems[existingCartItemIndex].quantity + 1
+                };
+                updatedItems[existingCartItemIndex] = updatedItem;
+            } else {
+                // If the item does not exist, add it with a quantity of 1
+                updatedItems.push({ ...item, quantity: 1 });
+            }
+
+            console.log(updatedItems);
+
+
+            return updatedItems;
+        });
+    };
+
+    // Handler to remove items from the cart
+    const removeItemsHandler = (itemId) => {
+        setShoppingCart((prevState) => {
+            const updatedItems = [...prevState];
+
+            // Find the index of the item in the cart
+            const existingCartItemIndex = updatedItems.findIndex(
+                (cartItem) => cartItem._id === itemId
+            );
+
+            if (existingCartItemIndex !== -1) {
+                const existingCartItem = updatedItems[existingCartItemIndex];
+
+                if (existingCartItem.quantity > 1) {
+                    // If quantity is greater than 1, decrease the quantity
+                    const updatedItem = {
+                        ...existingCartItem,
+                        quantity: existingCartItem.quantity - 1
+                    };
+                    updatedItems[existingCartItemIndex] = updatedItem;
+                } else {
+                    // If quantity is 1, remove the item from the cart
+                    updatedItems.splice(existingCartItemIndex, 1);
                 }
-                updatedItems[existingCartItemIndex] = updatedItem
             }
 
 
-            return {
-                ...prestate,
-                items: updatedItems
-            }
+            return updatedItems;
+        });
+    };
 
-        })
-    }
-
-    const removeItemsHandler = () => {
-
-    }
-
-
-
-
-
-
-    const ctxvalue = {
+    // Context value
+    const ctxValue = {
         items: shoppingCart,
         addItems: addItemsHandler,
         removeItems: removeItemsHandler
-    }
+    };
 
-
-
-
-    return <CartContext.Provider value={ctxvalue}>
-        {children}
-    </CartContext.Provider>
-}
+    // Provide the context
+    return (
+        <CartContext.Provider value={ctxValue}>
+            {children}
+        </CartContext.Provider>
+    );
+};

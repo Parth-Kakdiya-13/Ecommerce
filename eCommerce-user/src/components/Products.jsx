@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button } from './Button';
-Button
+
 
 export const Products = () => {
 
-
     const [data, setData] = useState([]);
-    const [error, setError] = useState('')
 
     useEffect(() => {
         async function getDataHandler() {
             try {
-                const response = await axios.get('https://ecommerce-o1ub.vercel.app/retrive')
+                const response = await axios.get('https://ecommerce-o1ub.vercel.app/retrive');
                 setData(response.data.data)
+                log(response.data.data)
 
             } catch (err) {
-                setError(err)
+                console.log(err);
+
             }
 
         }
@@ -30,7 +30,6 @@ export const Products = () => {
                 <h1 className='capitalize text-5xl font-thin text-center'>various products</h1>
             </div>
             <div className="grid grid-cols-4 gap-4 px-36 mt-10 ">
-                {error && <p className='text-red-500'>{error}</p>}
                 {data.length > 0 ? (
                     data.map((list, index) => (
                         <div

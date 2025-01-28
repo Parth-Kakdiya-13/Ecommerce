@@ -1,8 +1,20 @@
 import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion';
+import { CartContext } from '../store/CartContext';
+import { useContext } from 'react';
+
 
 export const NavigationBar = () => {
+
+    const cartCtx = useContext(CartContext)
+
+    const navigate = useNavigate();
+
+    function showCartHandler() {
+        navigate('/cart')
+    }
+
     return (
         <header>
             <span className='sm:hidden absolute top-3 left-3 text-white'>
@@ -16,10 +28,10 @@ export const NavigationBar = () => {
                 <ul className='flex items-center max-sm:flex-col'>
                     <li className='mx-5 text-white hover:text-yellow-500'><Link to="/">Home</Link></li>
                     <li className='mx-5 text-white hover:text-yellow-500'><Link to="/about">About Us</Link></li>
-                    <li className='mx-5 text-white hover:text-yellow-500'><Link to="shop">Shop</Link></li>
+                    <li className='mx-5 text-white hover:text-yellow-500'><Link to="/shop">Shop</Link></li>
                 </ul>
                 <div className='flex items-center'>
-                    <motion.button initial={{ opacity: 0, scale: 1.1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, stiffness: 500 }} className='ml-5 px-5 py-1 bg-yellow-500 text-black text-md rounded-full flex gap-3 justify-center items-center'>Cart <p className='w-5 h-5 flex items-center justify-center rounded-full bg-white'>{0}</p></motion.button>
+                    <motion.button initial={{ opacity: 0, scale: 1.1 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, stiffness: 500 }} className='ml-5 px-5 py-1 bg-yellow-500 text-black text-md rounded-full flex gap-3 justify-center items-center' onClick={showCartHandler}>Cart <p className='w-5 h-5 flex items-center justify-center rounded-full bg-white'>{cartCtx.items.length}</p></motion.button>
                 </div>
             </nav>
             <Outlet />

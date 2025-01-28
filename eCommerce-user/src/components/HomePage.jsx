@@ -6,7 +6,6 @@ import { Products } from './Products';
 export const HomePage = () => {
     return (
         <div>
-
             <div className='flex items-center justify-center gap-36 max-sm:flex-col'>
                 <div className='max-md:text-center'>
                     <p className='text-yellow-500 text-xl font-semibold'>A watch is a portable    </p>

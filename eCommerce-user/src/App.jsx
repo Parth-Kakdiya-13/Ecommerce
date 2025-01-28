@@ -21,11 +21,12 @@ function App() {
   ])
 
   return (
-    <>
-      <CartContextProvider>
-        <RouterProvider router={router}></RouterProvider>
-      </CartContextProvider>
-    </>
+
+    <CartContextProvider>
+      <RouterProvider router={router}>
+
+      </RouterProvider>
+    </CartContextProvider>
   )
 }
 
