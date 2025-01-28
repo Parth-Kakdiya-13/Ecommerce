@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button } from './Button';
+import { useNavigate } from 'react-router-dom';
 
 
 export const Products = () => {
 
     const [data, setData] = useState([]);
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         async function getDataHandler() {
@@ -22,6 +25,10 @@ export const Products = () => {
         }
         getDataHandler()
     }, [])
+
+    function showShopHanler() {
+        navigate('/shop');
+    }
 
     return (
         <div className=' mt-10 '>
@@ -49,7 +56,7 @@ export const Products = () => {
                                 <h2 className="font-semibold">{list.title}</h2>
                                 <p className='capitalize w-48'>{list.description}</p>
                                 <p className="text-green-600 font-bold py-2">Rs.{list.price}</p>
-                                <Button>More details</Button>
+                                <Button onClick={showShopHanler}>More details</Button>
                             </div>
                         </div>
                     ))
