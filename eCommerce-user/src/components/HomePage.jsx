@@ -6,9 +6,9 @@ import { Products } from './Products';
 export const HomePage = () => {
     return (
         <div>
-            <div className='flex items-center justify-center gap-36 max-sm:flex-col'>
+            <div className='flex items-center justify-center gap-36 max-sm:flex-col max-md:mt-16'>
                 <div className='max-md:text-center'>
-                    <p className='text-yellow-500 text-xl font-semibold'>A watch is a portable    </p>
+                    <p className='text-yellow-500 text-xl font-semibold'>A watch is a portable</p>
                     <h1 className='text-6xl py-5 max-md:text-4xl'>Smart Diamond<br /> Minimal Store</h1>
                     <p className='text-md'>Experienve your dacible like your deservs to. Safe for<br /> the ears, very for the heart, A treat you your years</p>
                     <button className='px-5 py-2 text-xl rounded-full bg-black text-yellow-500 mt-10'>Explore more</button>

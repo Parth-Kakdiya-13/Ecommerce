@@ -29,7 +29,7 @@ export const Products = () => {
                 <h2 className='uppercase text-yellow-500 text-center'>exlpore the awsome</h2>
                 <h1 className='capitalize text-5xl font-thin text-center'>various products</h1>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 px-36 mt-10 ">
+            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 justify-items-center  mt-10">
                 {data.length > 0 ? (
                     data.map((list, index) => (
                         <div

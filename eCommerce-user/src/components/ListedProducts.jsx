@@ -33,7 +33,7 @@ export const ListedProducts = () => {
 
 
     return (
-        <div className='mt-10'>
+        <div className='mt-20 sm:mt-10'>
             {error && <p>{error}</p>}
             <div className="flex flex-wrap gap-4 mx-10 justify-center">
                 {error && <p className='text-red-500'>{error}</p>}

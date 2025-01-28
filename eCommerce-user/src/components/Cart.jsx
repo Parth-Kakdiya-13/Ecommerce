@@ -19,8 +19,8 @@ export const Cart = () => {
 
     return (
         <div>
-            <h1 className='text-center text-5xl my-10'>Cart</h1>
-            <div className='flex gap-3'>
+            <h1 className='text-center text-5xl my-10 max-sm:mt-10'>Cart</h1>
+            <div className='gap-3 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 max-sm:justify-items-center'>
                 {items.map((list) => {
                     return <ul key={list._id} className='flex flex-col items-start border p-4 rounded shadow-md w-fit h-fix'>
                         <li className='capitalize font-semibold'>{list.title}</li>
