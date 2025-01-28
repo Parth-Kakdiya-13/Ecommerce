@@ -28,12 +28,12 @@ export const NavigationBar = () => {
 
     return (
         <header>
-            {!bar && <span className={`sm:hidden absolute z-50 top-3 left-3 z ${!bar ? 'text-black' : 'text-white'}`}>
+            {!bar && <span className={`sm:hidden fixed z-50 top-3 left-3 z ${!bar ? 'text-black' : 'text-white'}`}>
                 <button onClick={navBarOpen}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 16 16"><path fill="currentColor" d="M2 3.75A.75.75 0 0 1 2.75 3h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 3.75m0 4A.75.75 0 0 1 2.75 7h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 7.75m0 4a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75" /></svg>
                 </button>
             </span>}
-            {bar && <span className={`sm:hidden absolute z-50 top-3 left-3 z ${!bar ? 'text-black' : 'text-white'}`}>
+            {bar && <span className={`sm:hidden fixed z-50 top-3 left-3 z ${!bar ? 'text-black' : 'text-white'}`}>
                 <buton onClick={navBarClose}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="m12 13.4l-4.9 4.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.9-4.9l-4.9-4.9q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.9 4.9l4.9-4.9q.275-.275.7-.275t.7.275t.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275z" /></svg>
                 </buton>
