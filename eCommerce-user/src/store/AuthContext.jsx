@@ -4,33 +4,17 @@ import axios from "axios";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(
+        localStorage.getItem('session') === 'true'
+    );
 
-    useEffect(() => {
-        async function sessionHandler() {
-            try {
-                const response = await axios.get("https://ecommerce-o1ub.vercel.app/admin/session", {
-                    withCredentials: true, // Ensure cookies are sent
-                });
 
-                console.log(response.data); // Log response for debugging
-
-                if (response.data.isAuthenticated) {
-                    setIsAuthenticated(true);
-                } else {
-                    setIsAuthenticated(false);
-                }
-            } catch (error) {
-                console.error("Session check failed:", error);
-                setIsAuthenticated(false);
-            }
-        }
-
-        sessionHandler();
-    }, []); // Dependency array to prevent infinite calls
+    function login() {
+        setIsAuthenticated(true);
+        localStorage.setItem('session', 'true')
+    }
 
     async function logout() {
-
         try {
             const response = await axios.post(
                 "https://ecommerce-o1ub.vercel.app/admin/logout",
@@ -40,6 +24,7 @@ export const AuthProvider = ({ children }) => {
 
             if (response.status === 200) {
                 setIsAuthenticated(false);
+                localStorage.removeItem('session'); // Clear the session from localStorage
             }
         } catch (error) {
             console.error("Logout failed:", error);
@@ -47,7 +32,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, logout, login }}>
             {children}
         </AuthContext.Provider>
     );

@@ -28,7 +28,7 @@ export const Login = () => {
             const response = await axios.post('https://ecommerce-o1ub.vercel.app/admin/login', data, { withCredentials: true })
             if (response.status == 200) {
                 alert('Login Successfully');
-                authCtx.setIsAuthenticated(true)
+                authCtx.login();
                 navigate('/admin/addProduct')
             }
             if (response.status == 409) {
