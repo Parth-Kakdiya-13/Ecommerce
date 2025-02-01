@@ -2,14 +2,23 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 const cors = require('cors');
-const productrout = require('./routes/product.route')
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+
+const productrout = require('./routes/product.route');
+const authRout = require('./routes/auth.routes');
+
 mongoose.set('debug', true);
 
+const mongoURI = "mongodb+srv://parthrkakdiya:prk59595@cluster0.qx5ox.mongodb.net/product?retryWrites=true&w=majority"
 const app = express();
+const store = new MongoDBStore({
+    uri: mongoURI,
+    collection: 'sessions'
+});
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 
-const mongoURI = "mongodb+srv://parthrkakdiya:prk59595@cluster0.qx5ox.mongodb.net/product?retryWrites=true&w=majority"
 
 mongoose.connect(mongoURI)
     .then(() => console.log('Connected to MongoDB'))
@@ -34,13 +43,22 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
-
+app.use(
+    session({
+        secret: 'my secret',
+        resave: false,
+        saveUninitialized: false,
+        store: store
+    })
+)
 
 app.get('/', (req, res) => {
     res.json("hello");
 })
 
 app.use('/', productrout)
+app.use('/admin', authRout)
+
 
 
 

@@ -1,5 +1,6 @@
 const ProductModel = require('../models/product.model');
 
+
 exports.store = async (req, res) => {
 
     const { title, description, price } = req.body;

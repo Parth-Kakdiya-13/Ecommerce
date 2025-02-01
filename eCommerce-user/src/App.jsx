@@ -1,33 +1,52 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ListedProducts } from './user/ListedProducts';
+import { NavigationBar } from './user/NavigationBar';
+import { HomePage } from './user/HomePage';
+import { Cart } from './user/Cart';
+import { About } from './user/About';
+import { CartContextProvider } from './store/CartContext';
+import { Login } from './user/Login';
+import { SignUp } from './user/SignUp';
+import { AuthProvider, AuthContext } from './store/AuthContext';
+import { AddItmesForm } from './admin/AddItmesForm';
+import { ListedItems } from './admin/ListedItems';
+import { EditPage } from './admin/EditPage';
+import { ProtectedRoute } from './utils/ProtectedRoute';
+// Protected Route Component
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { ListedProducts } from './components/ListedProducts'
-import { NavigationBar } from './components/NavigationBar'
-import { HomePage } from './components/HomePage'
-import { Cart } from './components/Cart'
-import { About } from './components/About'
-import { CartContextProvider } from './store/CartContext'
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <NavigationBar />,
+    children: [
+      { path: '/', element: <HomePage /> },
+      { path: '/shop', element: <ListedProducts /> },
+      { path: '/cart', element: <Cart /> },
+      { path: '/about', element: <About /> },
+      { path: '/login', element: <Login /> },
+      { path: '/signup', element: <SignUp /> },
+      {
+        path: '/admin',
+        element: <ProtectedRoute />, // Wrap admin routes with ProtectedRoute
+        children: [
+          { path: 'addProduct', element: <AddItmesForm /> },
+          { path: 'products', element: <ListedItems /> },
+          { path: 'edit/:id', element: <EditPage /> }
+        ]
+      }
+    ]
+  }
+]);
 
 function App() {
-
-  const router = createBrowserRouter([
-    {
-      path: '/', element: <NavigationBar />, children: [
-        { path: '/', element: <HomePage /> },
-        { path: '/shop', element: <ListedProducts /> },
-        { path: '/cart', element: <Cart /> },
-        { path: '/about', element: <About /> }
-      ]
-    }
-  ])
-
   return (
-
-    <CartContextProvider>
-      <RouterProvider router={router}>
-
-      </RouterProvider>
-    </CartContextProvider>
-  )
+    <AuthProvider>
+      <CartContextProvider>
+        <RouterProvider router={router} />
+      </CartContextProvider>
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
