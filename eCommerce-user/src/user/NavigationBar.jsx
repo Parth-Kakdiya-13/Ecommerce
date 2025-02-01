@@ -40,7 +40,7 @@ export const NavigationBar = () => {
                 </buton>
             </span>
             }
-            <nav className={`w-4/5 relative mx-auto flex items-center justify-between p-5 bg-black rounded-full mt-5 max-sm:flex-col max-md:items-end max-md:w-full max-md:rounded-none max-md:mt-0 max-sm:fixed max-sm:-top-52 ${bar ? 'max-sm:top-0' : ' '} `}>
+            <nav className={`w-4/5 relative mx-auto flex items-center justify-between p-5 bg-black rounded-full mt-5 max-sm:flex-col max-md:items-end max-md:w-full max-md:rounded-none max-md:mt-0 max-sm:fixed max-sm:-top-64 ${bar ? 'max-sm:-top-0' : ' '} `}>
                 <h1 className='text-yellow-500 text-2xl font-semibold'>Vatsalya</h1>
                 <ul className='flex items-center max-sm:flex-col'>
                     <li className='mx-5 text-white hover:text-yellow-500'><Link to="/">Home</Link></li>
