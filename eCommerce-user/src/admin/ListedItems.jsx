@@ -49,7 +49,7 @@ export const ListedItems = () => {
     return (
         <div>
             {error && <p className="text-red-500">{error}</p>}
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap justify-center max-sm:mt-16 gap-4">
                 {items.length > 0 ? (
                     items.map((list, index) => (
                         <div
