@@ -25,7 +25,7 @@ export const Login = () => {
     async function postData(event) {
         event.preventDefault();
         try {
-            const response = await axios.post('https://ecommerce-o1ub.vercel.app/retrive/admin/login', data, { withCredentials: true })
+            const response = await axios.post('https://ecommerce-o1ub.vercel.app/admin/login', data, { withCredentials: true })
             if (response.status == 200) {
                 alert('Login Successfully');
                 authCtx.setIsAuthenticated(true)

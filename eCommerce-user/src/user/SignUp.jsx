@@ -22,7 +22,7 @@ export const SignUp = () => {
     async function postData(event) {
         event.preventDefault();
         try {
-            const response = await axios.post('https://ecommerce-o1ub.vercel.app/retrive/admin/signup', data)
+            const response = await axios.post('https://ecommerce-o1ub.vercel.app/admin/signup', data)
             if (response.status == 200) {
                 alert('SignUp Successfully')
                 navigate('/admin/addProduct')

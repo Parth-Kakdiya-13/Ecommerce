@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         async function sessionHandler() {
             try {
-                const response = await axios.get("https://ecommerce-o1ub.vercel.app/retrive/admin/session", {
+                const response = await axios.get("https://ecommerce-o1ub.vercel.app/admin/session", {
                     withCredentials: true, // Ensure cookies are sent
                 });
 
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
 
         try {
             const response = await axios.post(
-                "https://ecommerce-o1ub.vercel.app/retrive/admin/logout",
+                "https://ecommerce-o1ub.vercel.app/admin/logout",
                 {},
                 { withCredentials: true }
             );
