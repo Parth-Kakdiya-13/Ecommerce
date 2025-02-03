@@ -12,6 +12,7 @@ import { AddItmesForm } from './admin/AddItmesForm';
 import { ListedItems } from './admin/ListedItems';
 import { EditPage } from './admin/EditPage';
 import { ProtectedRoute } from './utils/ProtectedRoute';
+import { Orders } from './user/Orders';
 // Protected Route Component
 
 
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: '/', element: <HomePage /> },
       { path: '/shop', element: <ListedProducts /> },
       { path: '/cart', element: <Cart /> },
+      { path: '/order', element: <Orders /> },
       { path: '/about', element: <About /> },
       { path: '/login', element: <Login /> },
       { path: '/signup', element: <SignUp /> },

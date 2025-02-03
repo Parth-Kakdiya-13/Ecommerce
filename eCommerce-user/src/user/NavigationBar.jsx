@@ -46,6 +46,7 @@ export const NavigationBar = () => {
                     <li className='mx-5 text-white hover:text-yellow-500'><Link to="/">Home</Link></li>
                     <li className='mx-5 text-white hover:text-yellow-500'><Link to="/about">About Us</Link></li>
                     <li className='mx-5 text-white hover:text-yellow-500'><Link to="/shop">Shop</Link></li>
+                    <li className='mx-5 text-white hover:text-yellow-500'><Link to="/order">Orders</Link></li>
                     {authCtx.isAuthenticated && <li className='mx-5 text-white hover:text-yellow-500'><Link to="/admin/addProduct">Add Product</Link></li>}
                     {authCtx.isAuthenticated && <li className='mx-5 text-white hover:text-yellow-500'><Link to="/admin/products">Products</Link></li>}
                     {!authCtx.isAuthenticated && <li className='mx-5 text-white hover:text-yellow-500'><Link to="/login">Login</Link></li>}

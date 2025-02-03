@@ -4,11 +4,11 @@ const bodyParser = require('body-parser')
 const cors = require('cors');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-
+const User = require('./models/user')
 const productrout = require('./routes/product.route');
 const authRout = require('./routes/auth.routes');
 
-mongoose.set('debug', true);
+// mongoose.set('debug', true);
 
 const mongoURI = "mongodb+srv://parthrkakdiya:prk59595@cluster0.qx5ox.mongodb.net/product?retryWrites=true&w=majority"
 const app = express();
@@ -51,6 +51,21 @@ app.use(
         store: store
     })
 )
+
+app.use((req, res, next) => {
+
+    if (!req.session.user) {
+        return next();
+    }
+
+    User.findById(req.session.user._id)
+        .then(user => {
+            req.user = user;
+            next();
+        })
+        .catch(err => console.log(err));
+});
+
 
 app.get('/', (req, res) => {
     res.json("hello");

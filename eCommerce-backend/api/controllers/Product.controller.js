@@ -1,18 +1,18 @@
-const ProductModel = require('../models/product.model');
+const Product = require('../models/product');
 
 
 exports.store = async (req, res) => {
 
     const { title, description, price } = req.body;
-    // console.log(req.body);
+    console.log(req.user);
     if (!req.file) {
         return res.status(400).json({ message: 'Image is required' });
     }
 
     try {
         const imageBase64 = req.file.buffer.toString('base64');
-        const product = new ProductModel({
-            title, description, price, image: imageBase64
+        const product = new Product({
+            title, description, price, image: imageBase64, userId: req.user
         })
         const savedproduct = await product.save();
         res.status(200).send({ savedproduct })
@@ -24,7 +24,7 @@ exports.store = async (req, res) => {
 
 exports.getAll = async (req, res) => {
     try {
-        let data = await ProductModel.find();
+        let data = await Product.find();
         res.status(200).send({ "data": data })
     } catch (error) {
         res.status(500).send({ "error": error.message })
@@ -34,7 +34,7 @@ exports.getAll = async (req, res) => {
 exports.edit = async (req, res) => {
     try {
         const productId = req.params.id;
-        const product = await ProductModel.findById(productId);
+        const product = await Product.findById(productId);
         if (!product) {
             return res.status(404).json({ error: "Product not found" });
         }
@@ -50,7 +50,7 @@ exports.delete = async (req, res) => {
         const productId = req.params.id;
         console.log(productId);
 
-        const product = await ProductModel.findByIdAndDelete(productId)
+        const product = await Product.findByIdAndDelete(productId)
         if (!product) {
             return res.status(404).json({ error: "Product not deleted" });
         }
@@ -75,7 +75,7 @@ exports.update = async (req, res) => {
             updateData.image = req.file.buffer.toString('base64'); // Store image as base64 string
         }
 
-        const updatedProduct = await ProductModel.findByIdAndUpdate(
+        const updatedProduct = await Product.findByIdAndUpdate(
             productId,
             updateData,
             { new: true } // Return the updated document

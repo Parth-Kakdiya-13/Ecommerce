@@ -25,7 +25,7 @@ exports.postLogin = async (req, res) => {
 
         req.session.user = user
         req.session.save(err => {
-            console.log(err);
+            console.log("eRRor:" + err);
         });
         res.status(200).json({ message: 'user Login successfull.', sessionId: req.sessionId })
 

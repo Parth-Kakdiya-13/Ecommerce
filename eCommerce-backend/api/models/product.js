@@ -21,10 +21,14 @@ const ProductSchema = new mongoose.Schema(
             type: String, // Storing image as a Base64 encoded string
             required: [true, 'Image is required'], // Ensure the image is provided
         },
+        userId: {
+            type: mongoose.Schema.ObjectId,
+            ref: 'User'
+        }
     },
     { timestamps: true } // Automatically adds createdAt and updatedAt fields
 );
 
-const ProductModel = mongoose.model('Products', ProductSchema);
+const Product = mongoose.model('Product', ProductSchema);
 
-module.exports = ProductModel;
+module.exports = Product;
