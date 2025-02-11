@@ -46,7 +46,7 @@ export const AddItmesForm = () => {
         formData.append("image", data.image);
 
         try {
-            await axios.post("http://localhost:5959/create", formData, {
+            await axios.post("https://ecommerce-ashy-seven.vercel.app/create", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },

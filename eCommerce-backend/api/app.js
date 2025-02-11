@@ -30,8 +30,7 @@ app.use(session({
 }));
 
 const allowedOrigins = [
-    'https://ecommerce-one-pi-90.vercel.app',
-    'https://ecommerce-v36f.vercel.app',
+    "https://ecommerce-ql8y.vercel.app",
     "http://localhost:5173",
     "http://localhost:5174"
 ];

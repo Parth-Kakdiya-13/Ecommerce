@@ -11,7 +11,7 @@ export const ListedItems = () => {
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const response = await axios.get('http://localhost:5959/retrive', {
+                const response = await axios.get('https://ecommerce-ashy-seven.vercel.app/retrive', {
                     withCredentials: true  // ✅ Ensures session cookies are sent
                 });
                 setItems(response.data.data);
@@ -32,7 +32,7 @@ export const ListedItems = () => {
 
     async function deleteHandler(id) {
         try {
-            const response = await axios.delete(`http://localhost:5959/delete/${id}`, {
+            const response = await axios.delete(`https://ecommerce-ashy-seven.vercel.app/delete/${id}`, {
                 withCredentials: true  // ✅ Ensures session cookies are sent
             });
             console.log(response);

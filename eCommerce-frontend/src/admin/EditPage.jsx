@@ -17,7 +17,7 @@ export const EditPage = () => {
     useEffect(() => {
         const fetchItem = async () => {
             try {
-                const response = await axios.get(`http://localhost:5959/edit/${id}`, {
+                const response = await axios.get(`https://ecommerce-ashy-seven.vercel.app/edit/${id}`, {
                     withCredentials: true  // ✅ Ensures session cookies are sent
                 });;
                 setProduct(response.data);
@@ -67,7 +67,7 @@ export const EditPage = () => {
                 formData.append('image', product.image); // Add image file if present
             }
 
-            const response = await axios.put(`http://localhost:5959/update/${id}`, formData, {
+            const response = await axios.put(`https://ecommerce-ashy-seven.vercel.app/update/${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -88,7 +88,7 @@ export const EditPage = () => {
     // Handle delete
     async function deleteHandler() {
         try {
-            const response = await axios.delete(`http://localhost:5959/delete/${id}`);
+            const response = await axios.delete(`https://ecommerce-ashy-seven.vercel.app/delete/${id}`);
             if (response.status === 200) {
                 alert('Data deleted successfully');
                 navigate('/admin/products');

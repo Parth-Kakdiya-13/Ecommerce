@@ -22,7 +22,7 @@ export const SignUp = () => {
     async function postData(event) {
         event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5959/admin/signup', data);
+            const response = await axios.post('https://ecommerce-ashy-seven.vercel.app/admin/signup', data);
 
             if (response.status === 200) {
                 alert('SignUp Successfully');
