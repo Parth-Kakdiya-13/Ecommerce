@@ -11,7 +11,7 @@ export const Reset = () => {
 
     async function postEmail(e) {
         e.preventDefault();
-        const response = await axios.post('https://ecommerce-ashy-seven.vercel.app/admin/reset', data)
+        const response = await axios.post('https://ecommerce-backend-navy-chi.vercel.app/admin/reset', data)
 
         if (response.status === 200) {
             navigate('/login')

@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     async function logout() {
         try {
             const response = await axios.post(
-                "https://ecommerce-ashy-seven.vercel.app/admin/logout",
+                "https://ecommerce-backend-navy-chi.vercel.app/admin/logout",
                 {},
                 { withCredentials: true }
             );

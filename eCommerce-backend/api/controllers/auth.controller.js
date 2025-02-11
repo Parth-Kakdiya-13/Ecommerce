@@ -109,7 +109,7 @@ exports.postReset = async (req, res) => {
                 to: req.body.email,
                 from: 'parthrkakadiya@gmail.com',
                 subject: "reset password",
-                html: `Click This <a href=http://localhost:5173/reset/${token}>Link</a> to reset password`
+                html: `Click This <a href=https://ecommerce-ql8y.vercel.app/reset/${token}>Link</a> to reset password`
             })
             res.status(200).json({ message: "email sent" })
         })

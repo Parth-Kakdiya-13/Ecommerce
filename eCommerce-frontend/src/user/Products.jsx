@@ -13,7 +13,7 @@ export const Products = () => {
     useEffect(() => {
         async function getDataHandler() {
             try {
-                const response = await axios.get('https://ecommerce-ashy-seven.vercel.app/retrive', {
+                const response = await axios.get('https://ecommerce-backend-navy-chi.vercel.app/retrive', {
                     withCredentials: true  // ✅ Ensures session cookies are sent
                 });
                 setData(response.data.data)
