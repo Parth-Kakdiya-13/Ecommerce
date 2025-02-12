@@ -36,6 +36,9 @@ exports.getAll = async (req, res) => {
 
     try {
         let data = await Product.find();
+        if (!data) {
+            return res.status(400).send({ "message": "data not found" })
+        }
         res.status(200).send({ "data": data })
     } catch (error) {
         res.status(500).send({ "error": error.message })

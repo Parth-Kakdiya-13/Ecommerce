@@ -22,13 +22,20 @@ app.use(session({
     secret: process.env.SESSION_SECRET,  // Change this in production
     resave: false,
     saveUninitialized: false,
-    store: store,
-    // cookie: {
-    //     secure: process.env.NODE_ENV === "production", // Secure cookies in production
-    //     httpOnly: true, // Prevents XSS attacks
-    //     sameSite: "lax", // Helps prevent CSRF
-    //     maxAge: 1000 * 60 * 60 * 24 // 1 day
-    // }
+    store: store,  // Your MongoDB session store
+    cookie: {
+        // In production, set secure cookies (only sent over HTTPS)
+        secure: process.env.NODE_ENV === "production",
+
+        // Helps prevent JavaScript from accessing the cookie
+        httpOnly: true,
+
+        // SameSite is "None" for production because cookies need to be sent across different domains
+        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+
+        // Set maxAge for how long the session should last (1 day)
+        maxAge: 1000 * 60 * 60 * 24, // 1 day
+    }
 }));
 
 app.set("trust proxy", 1);

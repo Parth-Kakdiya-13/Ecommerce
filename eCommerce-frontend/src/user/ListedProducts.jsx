@@ -20,11 +20,8 @@ export const ListedProducts = () => {
     useEffect(() => {
         async function getDataHandler() {
             try {
-                const response = await API.get('/retrive', {
-                    withCredentials: true  // ✅ Ensures session cookies are sent
-                });
+                const response = await API.get('/retrive');
                 setData(response.data.data)
-
             } catch (err) {
                 setError(err)
             }
