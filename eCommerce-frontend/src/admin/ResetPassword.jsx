@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
+import API from '../API/api'
 export const ResetPassword = () => {
 
     const { token } = useParams();
@@ -14,7 +13,7 @@ export const ResetPassword = () => {
 
     async function postEmail(e) {
         e.preventDefault();
-        const response = await axios.post(`https://ecommerce-backend-navy-chi.vercel.app/admin/reset/${token}`, data);
+        const response = await API.post(`/admin/reset/${token}`, data);
         console.log(response);
         if (response.status === 200) {
             navigate('/login')

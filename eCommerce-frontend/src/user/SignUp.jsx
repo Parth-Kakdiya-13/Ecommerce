@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import API from '../API/api'
 import { useNavigate } from 'react-router-dom'
 
 export const SignUp = () => {
@@ -22,7 +22,7 @@ export const SignUp = () => {
     async function postData(event) {
         event.preventDefault();
         try {
-            const response = await axios.post('https://ecommerce-backend-navy-chi.vercel.app/admin/signup', data);
+            const response = await axios.post('http://localhost:5959/admin/signup', data);
 
             if (response.status === 200) {
                 alert('SignUp Successfully');

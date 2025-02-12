@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '../API/api'
 
 export const AddItmesForm = () => {
     const navigate = useNavigate();
@@ -46,11 +46,10 @@ export const AddItmesForm = () => {
         formData.append("image", data.image);
 
         try {
-            await axios.post("https://ecommerce-backend-navy-chi.vercel.app/create", formData, {
+            await API.post("/create", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
-                withCredentials: true, // ✅ Ensure cookies (sessions) are sent
             });
             alert("Data submitted successfully!");
             navigate("/admin/products");

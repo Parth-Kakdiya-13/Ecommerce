@@ -19,15 +19,19 @@ const store = new MongoDBStore({
 });
 
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET,  // Change this in production
     resave: false,
     saveUninitialized: false,
     store: store,
-    cookie: {
-        maxAge: 1000 * 60 * 60, // 1 hour
-        httpOnly: true
-    }
+    // cookie: {
+    //     secure: process.env.NODE_ENV === "production", // Secure cookies in production
+    //     httpOnly: true, // Prevents XSS attacks
+    //     sameSite: "lax", // Helps prevent CSRF
+    //     maxAge: 1000 * 60 * 60 * 24 // 1 day
+    // }
 }));
+
+app.set("trust proxy", 1);
 
 const allowedOrigins = [
     "https://ecommerce-ql8y.vercel.app",
@@ -79,18 +83,17 @@ app.use(async (req, res, next) => {  // 👈 Then, check session
 });
 
 
-app.get("/session", (req, res) => {
-    if (req.session.user) {
-        res.json({ message: "User is logged in", user: req.session.user });
-    } else {
-        res.json({ message: "No active session" });
-    }
-});
-
-
 
 app.use('/', productRoute);
 app.use('/admin', authRoute);
+
+app.get("/auth", (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+    res.json({ user: req.session.user });
+});
+
 
 
 app.listen(5959, () => {

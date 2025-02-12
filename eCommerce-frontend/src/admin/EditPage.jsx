@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import API from '../API/api'
 import { useParams, useNavigate } from 'react-router-dom';
 
 export const EditPage = () => {
@@ -17,9 +17,7 @@ export const EditPage = () => {
     useEffect(() => {
         const fetchItem = async () => {
             try {
-                const response = await axios.get(`https://ecommerce-backend-navy-chi.vercel.app/edit/${id}`, {
-                    withCredentials: true  // ✅ Ensures session cookies are sent
-                });;
+                const response = await API.get(`/edit/${id}`);;
                 setProduct(response.data);
                 if (response.data.image) {
                     setPreviewImage(`data:image/jpeg;base64,${response.data.image}`); // Set initial preview
@@ -67,7 +65,7 @@ export const EditPage = () => {
                 formData.append('image', product.image); // Add image file if present
             }
 
-            const response = await axios.put(`https://ecommerce-backend-navy-chi.vercel.app/update/${id}`, formData, {
+            const response = await API.put(`/update/${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -88,7 +86,7 @@ export const EditPage = () => {
     // Handle delete
     async function deleteHandler() {
         try {
-            const response = await axios.delete(`https://ecommerce-backend-navy-chi.vercel.app/delete/${id}`);
+            const response = await API.delete(`/delete/${id}`);
             if (response.status === 200) {
                 alert('Data deleted successfully');
                 navigate('/admin/products');

@@ -18,6 +18,7 @@ export const NavigationBar = () => {
     }
 
     function logout() {
+        alert("Logout Successfull");
         authCtx.logout();
         navigate("/login");
     }

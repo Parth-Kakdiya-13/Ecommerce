@@ -58,13 +58,15 @@ exports.postLogin = async (req, res) => {
         }
 
         req.session.user = user;
-
-        return res.status(200).json({ message: "Login successful", user: req.session.user });
+        req.session.save();
+        res.status(200).json({ message: "Login successful", user: req.session.user });
 
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
 };
+
+
 
 
 
@@ -80,10 +82,8 @@ exports.logout = (req, res) => {
 
 
 exports.checkSession = ("/session", (req, res) => {
-    console.log(req.session);
-
-    if (req.session) {
-        res.json({ isAuthenticated: true, session: req.session });
+    if (req.session.user) {
+        res.json({ isAuthenticated: true, session: req.session.user });
     } else {
         res.json({ isAuthenticated: false });
     }

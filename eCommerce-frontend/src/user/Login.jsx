@@ -26,30 +26,15 @@ export const Login = () => {
     async function postData(event) {
         event.preventDefault();
         try {
-            const response = await axios.post('https://ecommerce-backend-navy-chi.vercel.app/admin/login', data, { withCredentials: true })
-            if (response.status == 200) {
-                alert('Login Successfully');
-                authCtx.login();
-                return navigate('/admin/addProduct')
-            }
-
-
-
+            await authCtx.login({ email: data.email, password: data.password })
+            alert("Login Successfull")
+            navigate('/admin/addProduct')
         } catch (error) {
             if (error.response) {
-                // Handle specific status codes
-                if (error.response.status === 401) {
-                    alert('User not found');
-                    return navigate('/login');
-                } else {
-                    alert(`Login failed: ${error.response.data.message || 'Unexpected error'}`);
-                }
-            } else {
-                alert('Network error or server is not responding.');
+                navigate('/login');
+                console.error(error);
             }
-            console.error(error);
         }
-
     }
 
 

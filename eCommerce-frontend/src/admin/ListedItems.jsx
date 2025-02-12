@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import API from '../API/api'
 
 export const ListedItems = () => {
     const [items, setItems] = useState([]);
@@ -11,9 +10,7 @@ export const ListedItems = () => {
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const response = await axios.get('https://ecommerce-backend-navy-chi.vercel.app/retrive', {
-                    withCredentials: true  // ✅ Ensures session cookies are sent
-                });
+                const response = await API.get("/retrive");
                 setItems(response.data.data);
             } catch (err) {
                 setError('Failed to fetch items');
@@ -32,9 +29,7 @@ export const ListedItems = () => {
 
     async function deleteHandler(id) {
         try {
-            const response = await axios.delete(`https://ecommerce-backend-navy-chi.vercel.app/delete/${id}`, {
-                withCredentials: true  // ✅ Ensures session cookies are sent
-            });
+            const response = await API.delete(`/delete/${id}`);
             console.log(response);
 
             if (response.status == 200) {
@@ -80,7 +75,7 @@ export const ListedItems = () => {
                         </div>
                     ))
                 ) : (
-                    !error && <p className="text-gray-500">No items found.</p>
+                    !error && <p className="text-gray-500">Loading...</p>
                 )}
             </div>
         </div>

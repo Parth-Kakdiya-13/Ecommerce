@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
+import API from '../API/api'
 import { Button } from './Button';
 import { CartContext } from '../store/CartContext';
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +20,7 @@ export const ListedProducts = () => {
     useEffect(() => {
         async function getDataHandler() {
             try {
-                const response = await axios.get('https://ecommerce-backend-navy-chi.vercel.app/retrive', {
+                const response = await API.get('/retrive', {
                     withCredentials: true  // ✅ Ensures session cookies are sent
                 });
                 setData(response.data.data)

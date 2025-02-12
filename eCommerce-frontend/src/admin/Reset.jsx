@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import API from '../API/api'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -11,7 +11,7 @@ export const Reset = () => {
 
     async function postEmail(e) {
         e.preventDefault();
-        const response = await axios.post('https://ecommerce-backend-navy-chi.vercel.app/admin/reset', data)
+        const response = await API.post('/admin/reset', data)
 
         if (response.status === 200) {
             navigate('/login')
