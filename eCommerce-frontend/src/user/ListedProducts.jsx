@@ -35,13 +35,12 @@ export const ListedProducts = () => {
         <div className='mt-20 sm:mt-10'>
             <h1 className='text-center text-3xl'>Products</h1>
             {error && <p>{error}</p>}
-            <div className="flex flex-wrap gap-4 mx-10 justify-center mt-5">
-                {error && <p className='text-red-500'>{error}</p>}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mx-5   mt-10">
                 {data.length > 0 ? (
                     data.map((list, index) => (
                         <div
                             key={index}
-                            className="flex flex-col items-start border p-4 rounded shadow-md w-fit h-fix"
+                            className="flex flex-col items-start border rounded shadow-md w-fix h-fix max-sm:w-fit max-sm:mx-auto"
                         >
                             {list.image ? (
                                 <img
@@ -54,7 +53,7 @@ export const ListedProducts = () => {
                             )}
                             <div className='flex flex-col items-start w-full h-full p-4'>
                                 <h2 className="font-semibold capitalize">{list.title}</h2>
-                                <p className='capitalize  w-48'>{list.description}</p>
+                                <p className='capitalize w-48'>{list.description}</p>
                                 <p className="text-green-600 font-bold py-2">Rs. {list.price}</p>
                                 <Button className="capitalize" onClick={() => addItemsToCart(list)}>add to cart</Button>
                             </div>
@@ -64,6 +63,7 @@ export const ListedProducts = () => {
                     <p className="text-gray-500">Loading...</p>
                 )}
             </div>
+
         </div>
     )
 }
