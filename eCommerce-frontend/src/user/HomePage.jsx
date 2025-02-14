@@ -3,6 +3,7 @@ import necless from '../assets/product0.webp'
 import { Services } from './Services';
 import { Products } from './Products';
 import { useNavigate } from 'react-router-dom';
+import { Headings } from '../components/Headings';
 
 export const HomePage = () => {
 
@@ -23,6 +24,7 @@ export const HomePage = () => {
                 </div>
                 <img src={necless} className='max-md:w-1/3 max-sm:w-1/2' />
             </div>
+            <Headings caption="Get awome services" heading="Our Services" classes="mt-10" />
             <Services />
             <Products />
         </div>

@@ -9,7 +9,7 @@ export const Services = () => {
     const h2class = "text-lg font-semibold"
     const pcass = "text-md text-gray-500"
     return (
-        <div className='flex gap-10 items-center justify-center p-10 mt-10 max-sm:flex-col'>
+        <div className='flex gap-10 items-center justify-center p-10 max-sm:flex-col'>
             <div className='flex items-center gap-5 max-lg:flex-col max-lg:text-center'>
                 <img className='w-16 h-16' src={dilivery} />
                 <div className='max-sm:text-center'>
