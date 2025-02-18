@@ -8,6 +8,7 @@ const upload = multer({ storage });
 
 
 router.post('/create', upload.single('image'), productController.store);
+router.get('/retrive/:category', productController.getByCategory);
 router.get('/retrive', productController.getAll);
 router.get('/edit/:id', productController.edit);
 router.delete('/delete/:id', productController.delete)

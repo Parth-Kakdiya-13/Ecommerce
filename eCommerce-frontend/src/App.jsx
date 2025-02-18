@@ -15,6 +15,8 @@ import { ProtectedRoute } from './utils/ProtectedRoute';
 import { Orders } from './user/Orders';
 import { Reset } from './admin/Reset';
 import { ResetPassword } from './admin/ResetPassword';
+import { Categories } from './user/Categories';
+import { OrderContextProvider } from './store/OrderContext';
 // Protected Route Component
 
 
@@ -25,11 +27,12 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <HomePage /> },
       { path: 'shop', element: <ListedProducts /> },
+      { path: 'shop/:category', element: <Categories /> },
       { path: 'cart', element: <Cart /> },
       { path: 'order', element: <Orders /> },
       { path: 'about', element: <About /> },
       { path: 'login', element: <Login /> },
-      { path: 'signup', element: <SignUp /> },
+      // { path: 'signup', element: <SignUp /> },
       { path: 'reset', element: <Reset /> },
       { path: 'reset/:token', element: <ResetPassword /> },
       {
@@ -48,9 +51,11 @@ const router = createBrowserRouter([
 function App() {
   return (
     <AuthProvider>
-      <CartContextProvider>
-        <RouterProvider router={router} />
-      </CartContextProvider>
+      <OrderContextProvider>
+        <CartContextProvider>
+          <RouterProvider router={router} />
+        </CartContextProvider>
+      </OrderContextProvider>
     </AuthProvider>
   );
 }

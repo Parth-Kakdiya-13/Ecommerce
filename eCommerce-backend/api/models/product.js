@@ -17,6 +17,11 @@ const ProductSchema = new mongoose.Schema(
             required: [true, 'Price is required'],
             min: [0, 'Price cannot be negative'], // Validation to ensure price is non-negative
         },
+        category: {
+            type: String,
+            required: [true, 'Category is required'],
+            trim: true,
+        },
         image: {
             type: String, // Storing image as a Base64 encoded string
             required: [true, 'Image is required'], // Ensure the image is provided

@@ -9,6 +9,7 @@ export const AddItmesForm = () => {
         title: "",
         description: "",
         price: "",
+        category: "",
         image: null, // New state for image file
     });
 
@@ -43,6 +44,7 @@ export const AddItmesForm = () => {
         formData.append("title", data.title);
         formData.append("description", data.description);
         formData.append("price", data.price);
+        formData.append("category", data.category);
         formData.append("image", data.image);
 
         try {
@@ -84,6 +86,14 @@ export const AddItmesForm = () => {
                     className='border border-black rounded-md block'
                     name='price'
                     value={data.price}
+                    onChange={changeHandler}
+                />
+                <label>Category</label>
+                <input
+                    type='text'
+                    className='border border-black rounded-md block'
+                    name='category'
+                    value={data.category}
                     onChange={changeHandler}
                 />
                 <label>Upload Image</label>

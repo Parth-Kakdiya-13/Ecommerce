@@ -64,8 +64,8 @@ export const NavigationBar = () => {
                     <li className={`mx-0 lg:mx-5 text-white hover:text-yellow-500 ${isActive('/order') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/order">Orders</Link></li>
                     {authCtx.isAuthenticated && <li className={`mx-0 lg:mx-5 text-white hover:text-yellow-500 ${isActive('/admin/addProduct') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/admin/addProduct">Add Product</Link></li>}
                     {authCtx.isAuthenticated && <li className={`mx-0 lg:mx-5 text-white hover:text-yellow-500 ${isActive('/admin/products') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/admin/products">Products</Link></li>}
-                    {!authCtx.isAuthenticated && <li className={`mx-0 lg:mx-5 text-white hover:text-yellow-500 ${isActive('/login') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/login">Login</Link></li>}
-                    {!authCtx.isAuthenticated && <li className={`mx-0 lg:mx-5 text-white hover:text-yellow-500 ${isActive('/signup') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/signup">SignUp</Link></li>}
+                    {!authCtx.isAuthenticated && <li className={`mx-0 lg:mx-5 text-white hover:text-yellow-500 ${isActive('/login') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/login">Admin</Link></li>}
+                    {/* {!authCtx.isAuthenticated && <li className={`mx-0 lg:mx-5 text-white hover:text-yellow-500 ${isActive('/signup') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/signup">SignUp</Link></li>} */}
                     {authCtx.isAuthenticated && (
                         <li className="mx-0 lg:mx-5 text-white hover:text-yellow-500">
                             <button onClick={logout}>Logout</button>

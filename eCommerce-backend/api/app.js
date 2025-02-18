@@ -9,8 +9,12 @@ const User = require('./models/user');
 const productRoute = require('./routes/product.route');
 const authRoute = require('./routes/auth.routes');
 
-const mongoURI = process.env.MONGO_URI
+if (!process.env.MONGO_URI || !process.env.SESSION_SECRET) {
+    console.error("Missing required environment variables! Check .env file.");
+    process.exit(1);
+}
 
+const mongoURI = process.env.MONGO_URI;
 const app = express();
 
 const store = new MongoDBStore({
@@ -18,23 +22,20 @@ const store = new MongoDBStore({
     collection: 'sessions'
 });
 
+store.on('error', (error) => {
+    console.error("Session Store Error:", error);
+});
+
 app.use(session({
-    secret: process.env.SESSION_SECRET,  // Change this in production
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: store,  // Your MongoDB session store
+    store: store,
     cookie: {
-        // In production, set secure cookies (only sent over HTTPS)
-        secure: process.env.NODE_ENV === "production",
-
-        // Helps prevent JavaScript from accessing the cookie
+        secure: process.env.COOKIE_SECURE === "true",
         httpOnly: true,
-
-        // SameSite is "None" for production because cookies need to be sent across different domains
         sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-
-        // Set maxAge for how long the session should last (1 day)
-        maxAge: 1000 * 60 * 60 * 24, // 1 day
+        maxAge: 1000 * 60 * 60 * 24
     }
 }));
 
@@ -50,8 +51,8 @@ app.use(cors({
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
-            console.error(`CORS error: Origin ${origin} not allowed`);
-            callback(new Error('Not allowed by CORS'));
+            console.warn(`CORS blocked: ${origin}`);
+            callback(null, false);
         }
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -63,19 +64,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect(mongoURI)
     .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.error('Could not connect to MongoDB:', err));
+    .catch(err => {
+        console.error('Could not connect to MongoDB:', err);
+        process.exit(1);
+    });
 
-
-
-
-
-app.use(async (req, res, next) => {  // 👈 Then, check session
-    if (!req.session.user) {
-        console.log("No User in Session");
+app.use(async (req, res, next) => {
+    if (!req.session.user || !mongoose.Types.ObjectId.isValid(req.session.user._id)) {
+        console.log("No valid User ID in Session");
         return next();
     }
     try {
-        const user = await User.findById(req.session.user?._id);
+        const user = await User.findById(req.session.user._id);
         if (!user) {
             console.log("User Not Found in Database");
             return next();
@@ -89,11 +89,6 @@ app.use(async (req, res, next) => {  // 👈 Then, check session
     }
 });
 
-
-
-app.use('/', productRoute);
-app.use('/admin', authRoute);
-
 app.get("/auth", (req, res) => {
     if (!req.session.user) {
         return res.status(401).json({ message: "Unauthorized" });
@@ -101,8 +96,10 @@ app.get("/auth", (req, res) => {
     res.json({ user: req.session.user });
 });
 
+app.use('/', productRoute);
+app.use('/admin', authRoute);
 
-
-app.listen(5959, () => {
-    console.log("Server running on port 5959");
+const PORT = process.env.PORT || 5959;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });

@@ -1,23 +1,21 @@
 const Product = require('../models/product');
 
 exports.store = async (req, res) => {
-    // console.log("session", req.session.user);
-
     if (!req.session.user) {
         return res.status(401).json({ message: "Unauthorized: No user session found" });
     }
 
-    const { title, description, price } = req.body;
+    const { title, description, price, category } = req.body;
     if (!req.file) {
         return res.status(400).json({ message: 'Image is required' });
     }
-
     try {
         const imageBase64 = req.file.buffer.toString('base64');
         const product = new Product({
             title,
             description,
             price,
+            category,
             image: imageBase64,
             userId: req.user
         });
@@ -32,10 +30,23 @@ exports.store = async (req, res) => {
 
 
 exports.getAll = async (req, res) => {
-    // console.log("productSEssion:", req.session);
-
     try {
         let data = await Product.find();
+        if (!data) {
+            return res.status(400).send({ "message": "data not found" })
+        }
+        res.status(200).send({ "data": data })
+    } catch (error) {
+        res.status(500).send({ "error": error.message })
+    }
+}
+
+exports.getByCategory = async (req, res) => {
+    const category = req.params.category;
+    console.log(category);
+
+    try {
+        let data = await Product.find({ category: category });
         if (!data) {
             return res.status(400).send({ "message": "data not found" })
         }
@@ -62,7 +73,6 @@ exports.edit = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
-
     try {
         const productId = req.params.id;
 
@@ -84,13 +94,12 @@ exports.update = async (req, res) => {
             title: req.body.title,
             description: req.body.description,
             price: req.body.price,
+            category: req.body.category
         };
 
-        // If a new image is uploaded
         if (req.file) {
             updateData.image = req.file.buffer.toString('base64'); // Store image as base64 string
         }
-
         const updatedProduct = await Product.findByIdAndUpdate(
             productId,
             updateData,
