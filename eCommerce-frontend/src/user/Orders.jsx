@@ -47,7 +47,7 @@ export const Orders = () => {
                     </div>
                 </div>
             ) : (
-                <p className='text-center mt-10 text-xl text-gray-500'>You are not ordering anything.🛍️</p>
+                <p className='text-center mt-10 text-xl text-gray-500'>No orders yet.🛍️ Start shopping now!</p>
             )}
         </div>
 
