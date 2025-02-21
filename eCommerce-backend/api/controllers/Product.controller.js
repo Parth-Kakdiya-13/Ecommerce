@@ -74,6 +74,9 @@ exports.edit = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).json({ message: "Unauthorized: No user session found" });
+    }
     try {
         const productId = req.params.id;
 
