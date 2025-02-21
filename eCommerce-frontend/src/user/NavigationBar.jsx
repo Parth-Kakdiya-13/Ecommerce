@@ -53,7 +53,7 @@ export const NavigationBar = () => {
                 initial={bar ? { y: -200 } : {}}
                 animate={bar ? { y: 0 } : {}}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
-                className={`w-4/5 max-[960px]:w-full relative mx-auto flex items-center justify-between p-5 bg-black rounded-full mt-5 max-md:flex-col max-md:items-end max-[960px]:rounded-none max-md:mt-0 max-md:fixed max-md:transition-all max-md:duration-500 max-md:ease-in-out ${bar ? "max-md:top-0" : "max-md:-top-96"
+                className={`w-4/5 max-[960px]:w-full relative mx-auto flex items-center justify-between p-5 bg-black rounded-full mt-5 max-md:flex-col max-md:items-end max-[960px]:rounded-none max-md:mt-0 max-md:fixed max-md:z-40 max-md:transition-all max-md:duration-500 max-md:ease-in-out ${bar ? "max-md:top-0" : "max-md:-top-96"
                     }`}
             >
                 <h1 className="text-yellow-500 text-2xl font-thin">Vatsalya</h1>

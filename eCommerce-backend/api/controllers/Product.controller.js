@@ -59,7 +59,8 @@ exports.getByCategory = async (req, res) => {
 exports.edit = async (req, res) => {
     if (!req.session.user) {
         return res.status(401).json({ message: "Unauthorized: No user session found" });
-    } try {
+    }
+    try {
         const productId = req.params.id;
         const product = await Product.findById(productId);
         if (!product) {
@@ -87,6 +88,9 @@ exports.delete = async (req, res) => {
 }
 
 exports.update = async (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).json({ message: "Unauthorized: No user session found" });
+    }
     try {
         const productId = req.params.id;
 
