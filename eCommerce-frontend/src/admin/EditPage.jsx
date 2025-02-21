@@ -6,6 +6,7 @@ export const EditPage = () => {
     const [product, setProduct] = useState({
         title: '',
         description: '',
+        category: '',
         price: '',
         image: null, // Store the file object
     });
@@ -61,6 +62,7 @@ export const EditPage = () => {
             formData.append('title', product.title);
             formData.append('description', product.description);
             formData.append('price', product.price);
+            formData.append('category', product.category);
             if (product.image) {
                 formData.append('image', product.image); // Add image file if present
             }
@@ -113,7 +115,7 @@ export const EditPage = () => {
                 )}
 
                 <label>
-                    Title:
+                    Title:{" "}
                     <input
                         name="title"
                         value={product.title}
@@ -122,7 +124,7 @@ export const EditPage = () => {
                     />
                 </label>
                 <label>
-                    Description:
+                    Description:{" "}
                     <input
                         name="description"
                         value={product.description}
@@ -131,7 +133,7 @@ export const EditPage = () => {
                     />
                 </label>
                 <label>
-                    Price:
+                    Price:{" "}
                     <input
                         name="price"
                         value={product.price}
@@ -139,8 +141,17 @@ export const EditPage = () => {
                         onChange={changeHandler}
                     />
                 </label>
+                <label>Category:{" "}
+                    <input
+                        type='text'
+                        className="border-2 my-1"
+                        name='category'
+                        value={product.category}
+                        onChange={changeHandler}
+                    />
+                </label>
                 <label>
-                    Image:
+                    Image:{" "}
                     <input
                         type="file"
                         accept="image/*"
