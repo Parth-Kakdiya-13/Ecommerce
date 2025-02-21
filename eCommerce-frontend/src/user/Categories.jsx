@@ -83,7 +83,7 @@ export const Categories = () => {
             {moreDetail.length > 0 ?
                 <div>
                     <div className='z-40 w-full h-full fixed top-0 left-0 bg-black bg-opacity-50 transition-all duration-200 ease-in text-white text-2xl capitalize flex flex-col-reverse justify-center items-center' onClick={closeBackDrop}></div>
-                    <div className='absolute w-1/2 max-sm:w-fit h-fit z-50 bg-white rounded-xl top-20 left-1/4 max-[400px]:left-5 p-5'>
+                    <div className='absolute top-0 left-1/4 max-[500px]:left-24 max-[450px]:left-16 max-[400px]:left-10 w-1/2 max-sm:w-fit h-fit mx-auto rounded-xl p-5  z-50 bg-white '>
                         {moreDetail.map((list, index) => (
                             <div key={index}>
                                 <div
