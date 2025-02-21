@@ -2,13 +2,13 @@ require("dotenv").config();
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
-const nodeMailer = require('nodemailer')
+const { promisify } = require('util');
+const nodeMailer = require('nodemailer');
 const sendGridTransport = require('nodemailer-sendgrid-transport');
 
-// Ensure environment variable is correctly set
 if (!process.env.SENDGRID_API_KEY) {
     console.error("Missing SENDGRID_API_KEY in .env file");
-    process.exit(1); // Stop the server if API key is missing
+    process.exit(1);
 }
 
 const transporter = nodeMailer.createTransport(
@@ -17,22 +17,23 @@ const transporter = nodeMailer.createTransport(
             api_key: process.env.SENDGRID_API_KEY
         }
     })
-)
-
+);
 
 exports.postRegister = async (req, res) => {
     const { email, password } = req.body;
     try {
-        const user = await User.findOne({ email: email });
+        const user = await User.findOne({ email });
         if (!user) {
             const hashedPassword = await bcrypt.hash(password, 10);
-            const newUser = new User({ email, password: hashedPassword })
+            const newUser = new User({ email, password: hashedPassword });
             await newUser.save();
-            res.status(200).json({ message: "User registered successfully!" });
+            return res.status(200).json({ message: "User registered successfully!" });
+        } else {
+            return res.status(409).json({ message: "User already exists." });
         }
-        res.status(409).json({ message: "user already exists." })
     } catch (err) {
-        res.status(500).json({ error: "Error registering user" });
+        console.error("Registration error:", err);
+        return res.status(500).json({ error: "Error registering user" });
     }
 };
 
@@ -44,13 +45,12 @@ exports.postLogin = async (req, res) => {
             return res.status(401).json({ message: "Invalid credentials" });
         }
 
-        // Ensure email sending is handled properly
         try {
             await transporter.sendMail({
                 to: email,
                 from: 'parthrkakadiya@gmail.com',
-                subject: "Login SuccessFull",
-                html: '<h1>You successfully Login</h1>',
+                subject: "Login Successful",
+                html: '<h1>You have successfully logged in.</h1>',
             });
         } catch (mailError) {
             console.error("Error sending mail:", mailError);
@@ -58,82 +58,83 @@ exports.postLogin = async (req, res) => {
         }
 
         req.session.user = user;
-        req.session.save();
-        res.status(200).json({ message: "Login successful", user: req.session.user });
-
+        req.session.save(err => {
+            if (err) {
+                console.error("Session save error:", err);
+                return res.status(500).json({ message: "Session error" });
+            }
+            res.status(200).json({ message: "Login successful", user: req.session.user });
+        });
     } catch (error) {
+        console.error("Login error:", error);
         return res.status(500).json({ message: error.message });
     }
 };
 
-
-
-
-
 exports.logout = (req, res) => {
     req.session.destroy(err => {
         if (err) {
-            console.log("logout", err);
+            console.error("Logout error:", err);
+            return res.status(500).json({ message: "Error logging out" });
         }
+        res.json({ message: "Logged out successfully" });
     });
-    res.json({ message: "Logged Out" })
-}
+};
 
-
-
-exports.checkSession = ("/session", (req, res) => {
+exports.checkSession = (req, res) => {
     if (req.session.user) {
         res.json({ isAuthenticated: true, session: req.session.user });
     } else {
         res.json({ isAuthenticated: false });
     }
-});
+};
 
 exports.postReset = async (req, res) => {
     console.log(req.body);
-
     try {
-        crypto.randomBytes(32, async (err, buffer) => {
-            if (err) {
-                console.log(err);
-            }
-            const token = buffer.toString('hex');
-            const user = await User.findOne({ email: req.body.email })
-            if (!user) {
-                return res.status(401).json({ message: "No Account with that email found." })
-            }
-            user.resetToken = token;
-            user.resetTokenExpiration = Date.now() + 36000000;
-            await user.save();
-            await transporter.sendMail({
-                to: req.body.email,
-                from: 'parthrkakadiya@gmail.com',
-                subject: "reset password",
-                html: `Click This <a href=https://ecommerce-ql8y.vercel.app/reset/${token}>Link</a> to reset password`
-            })
-            res.status(200).json({ message: "email sent" })
-        })
-    } catch (error) {
-        res.status(500).json({ message: error.message })
-    }
-}
-
-exports.postNewPassword = async (req, res, next) => {
-    console.log(req.body)
-    const token = req.params.token;
-    const newPassword = req.body.password
-    try {
-        const user = await User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
+        const randomBytesAsync = promisify(crypto.randomBytes);
+        const buffer = await randomBytesAsync(32);
+        const token = buffer.toString('hex');
+        const user = await User.findOne({ email: req.body.email });
         if (!user) {
-            res.status(409).json({ message: "user not found" })
+            return res.status(404).json({ message: "No account with that email found." });
         }
-        const hashedPassword = await bcrypt.hash(newPassword, 12)
+        user.resetToken = token;
+        user.resetTokenExpiration = Date.now() + 36000000; // Adjust as needed
+        await user.save();
+        await transporter.sendMail({
+            to: req.body.email,
+            from: 'parthrkakadiya@gmail.com',
+            subject: "Reset Password",
+            html: `Click <a href="https://ecommerce-ql8y.vercel.app/reset/${token}">here</a> to reset your password`
+        });
+        res.status(200).json({ message: "Reset email sent" });
+    } catch (error) {
+        console.error("Reset error:", error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+exports.postNewPassword = async (req, res) => {
+    console.log(req.body);
+    const token = req.params.token;
+    const newPassword = req.body.password;
+    try {
+        const user = await User.findOne({
+            resetToken: token,
+            resetTokenExpiration: { $gt: Date.now() }
+        });
+        if (!user) {
+            return res.status(404).json({ message: "User not found or token expired" });
+        }
+        const hashedPassword = await bcrypt.hash(newPassword, 12);
         user.password = hashedPassword;
         user.resetToken = undefined;
         user.resetTokenExpiration = undefined;
         await user.save();
-        res.status(200).json({ message: "password reset successfull" })
+        res.status(200).json({ message: "Password reset successful" });
     } catch (error) {
-        res.status(500).json({ message: error.message })
+        console.error("New password error:", error);
+        res.status(500).json({ message: error.message });
     }
-}
+};
