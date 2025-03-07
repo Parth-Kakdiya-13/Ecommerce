@@ -8,7 +8,7 @@ import logoBar from '../assets/ASLogoBar.png'
 
 export const NavigationBar = () => {
     const [bar, setBar] = useState(false);
-    const [animateCart, setAnimateCart] = useState(false); // To trigger cart animation
+    const [animateCart, setAnimateCart] = useState(false);
 
     const cartCtx = useContext(CartContext);
     const authCtx = useContext(AuthContext);
@@ -30,9 +30,7 @@ export const NavigationBar = () => {
 
     return (
         <header>
-            {!bar && <div className="">
-                <img src={logoBar} className="transition-all duration-1000 ease-in-out fixed z-50 top-4 left-0 w-24 h-24" />
-            </div>}
+
 
             {!bar && (
                 <span className="md:hidden fixed z-50 top-3 right-3 text-black">
@@ -43,6 +41,7 @@ export const NavigationBar = () => {
                     </button>
                 </span>
             )}
+
             {bar && (
                 <span className="md:hidden fixed z-50 top-3 right-3 text-white">
                     <button onClick={() => setBar(false)}>
@@ -52,6 +51,10 @@ export const NavigationBar = () => {
                     </button>
                 </span>
             )}
+
+            {!bar && <div className="md:hidden">
+                <img src={logoBar} className="transition-all duration-1000 ease-in-out fixed z-50 top-4 left-0 w-24 h-24" />
+            </div>}
 
 
             {/* Navbar */}
