@@ -66,13 +66,13 @@ export const NavigationBar = () => {
                     <img src={logo} className="absolute top-4 left-0 w-24 h-24" />
                 </div>
                 <ul className="flex items-center max-md:flex-col gap-2 max-md:items-start">
-                    <li className={`mx-0 xl:mx-5 text-white hover:text-yellow-500 ${isActive('/') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/">Home</Link></li>
-                    <li className={`mx-0 xl:mx-5 text-white hover:text-yellow-500 ${isActive('/about') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/about">About Us</Link></li>
-                    <li className={`mx-0 xl:mx-5 text-white hover:text-yellow-500 ${isActive('/shop') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/shop">Shop</Link></li>
-                    <li className={`mx-0 xl:mx-5 text-white hover:text-yellow-500 ${isActive('/order') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/order">Orders</Link></li>
-                    {authCtx.isAuthenticated && <li className={`mx-0 lg:mx-5 text-white hover:text-yellow-500 ${isActive('/admin/addProduct') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/admin/addProduct">Add Product</Link></li>}
-                    {authCtx.isAuthenticated && <li className={`mx-0 lg:mx-5 text-white hover:text-yellow-500 ${isActive('/admin/products') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/admin/products">Products</Link></li>}
-                    {!authCtx.isAuthenticated && <li className={`mx-0 lg:mx-5 text-white hover:text-yellow-500 ${isActive('/login') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/login">Admin</Link></li>}
+                    <li className={`mx-0 lg:mx-1 xl:mx-5 text-white hover:text-yellow-500 ${isActive('/') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/">Home</Link></li>
+                    <li className={`mx-0 lg:mx-1 xl:mx-5 text-white hover:text-yellow-500 ${isActive('/about') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/about">About Us</Link></li>
+                    <li className={`mx-0 lg:mx-1 xl:mx-5 text-white hover:text-yellow-500 ${isActive('/shop') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/shop">Shop</Link></li>
+                    <li className={`mx-0 lg:mx-1 xl:mx-5 text-white hover:text-yellow-500 ${isActive('/order') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/order">Orders</Link></li>
+                    {authCtx.isAuthenticated && <li className={`mx-0 lg:mx-1 xl:mx-5 text-white hover:text-yellow-500 ${isActive('/admin/addProduct') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/admin/addProduct">Add Product</Link></li>}
+                    {authCtx.isAuthenticated && <li className={`mx-0 lg:mx-1 xl:mx-5 text-white hover:text-yellow-500 ${isActive('/admin/products') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/admin/products">Products</Link></li>}
+                    {!authCtx.isAuthenticated && <li className={`mx-0 lg:mx-1 xl:mx-5 text-white hover:text-yellow-500 ${isActive('/login') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/login">Admin</Link></li>}
                     {/* {!authCtx.isAuthenticated && <li className={`mx-0 lg:mx-5 text-white hover:text-yellow-500 ${isActive('/signup') ? 'text-yellow-500' : ' '}`} onClick={() => setBar(false)}><Link to="/signup">SignUp</Link></li>} */}
                     {authCtx.isAuthenticated && (
                         <li className="mx-0 lg:mx-5 text-white hover:text-yellow-500">
