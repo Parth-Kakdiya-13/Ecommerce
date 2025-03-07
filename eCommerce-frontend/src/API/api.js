@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-    baseURL: "http://localhost:5959",
+    baseURL: "https://ecommerce-backend-navy-chi.vercel.app",
     withCredentials: true // ✅ Ensures cookies (session) are sent with requests
 });
 
