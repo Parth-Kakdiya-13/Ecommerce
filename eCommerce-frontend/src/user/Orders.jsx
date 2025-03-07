@@ -47,7 +47,7 @@ export const Orders = () => {
                     </div>
                 </div>
             ) : (
-                <p className='text-center mt-10 text-xl text-gray-500'>No orders yet.🛍️ Start shopping now!</p>
+                <p className='text-center mt-32  md:mt-0 text-xl text-gray-500'>No orders yet.🛍️ Start shopping now!</p>
             )}
         </div>
 

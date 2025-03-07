@@ -34,8 +34,7 @@ export const Cart = () => {
 
     return (
         <div>
-            <h1 className='text-center text-5xl my-10 max-sm:mt-10'>Cart</h1>
-            {items.length <= 0 && <p className='text-center text-gray-500 text-xl'>Your cart is empty 😔 Start shopping now!</p>}
+            {items.length <= 0 && <p className='text-center mt-32  md:mt-5 text-xl text-gray-500'>Your cart is empty 😔 Start shopping now!</p>}
             <div className="flex gap-5 justify-center items-center max-sm:flex-col  mt-10">
                 {items.map((list) => {
                     return <ul key={list._id} className='flex flex-col items-start border p-4 rounded shadow-md w-fit h-fix'>

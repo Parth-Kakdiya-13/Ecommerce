@@ -40,7 +40,7 @@ export const Login = () => {
 
 
     return (
-        <div className='mt-20 bg-gray-200 w-fit mx-auto rounded-xl p-5'>
+        <div className='mt-32 md:mt-16 bg-gray-200 w-fit mx-auto rounded-xl p-5'>
             <form>
                 <label>Email</label>
                 <input
