@@ -57,7 +57,7 @@ export const Cart = () => {
                 <p className='text-xl font-mono p-2 rounded-md w-fit bg-gray-200 mb-2'>Total Price: {totalAmount}</p>
                 <p className='flex gap-2'>
                     <Button onClick={() => placeOrderHandler(items, totalAmount)}>Place Order</Button>
-                    <Button onClick={cancelHandler}>Cancel</Button>
+                    <Button className="bg-gradient-to-r from-teal-400 to-yellow-200" onClick={cancelHandler}>Cancel</Button>
                 </p>
             </p> : " "}
         </div>

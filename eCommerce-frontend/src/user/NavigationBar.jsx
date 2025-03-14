@@ -5,6 +5,7 @@ import { CartContext } from "../store/CartContext";
 import { AuthContext } from "../store/AuthContext";
 import logo from '../assets/ASLogo.png'
 import logoBar from '../assets/ASLogoBar.png'
+import { Button } from "../components/Button";
 
 export const NavigationBar = () => {
     const [bar, setBar] = useState(false);
@@ -82,18 +83,12 @@ export const NavigationBar = () => {
                     )}
                 </ul>
                 <div className="flex items-center max-md:mt-5">
-                    <motion.button
-                        initial={{ opacity: 0, scale: 1.1 }}
-                        animate={{
-                            opacity: 1,
-                            scale: animateCart ? 1.2 : 1  // Combine both animations into a single "scale"
-                        }}
-                        transition={{ duration: 0.5, stiffness: 500 }}
-                        className='ml-5 px-5 py-1 bg-yellow-500 text-black text-md rounded-full flex gap-3 justify-center items-center'
+                    <Button
+                        className='ml-5text-md rounded-full flex gap-3 justify-center items-center'
                         onClick={showCartHandler}
                     >
-                        Cart <p className='w-5 h-5 flex items-center justify-center rounded-full bg-white'>{cartCtx.items.length}</p>
-                    </motion.button>
+                        Cart <p className='w-5 h-5 flex items-center justify-center rounded-full bg-black'>{cartCtx.items.length}</p>
+                    </Button>
 
                 </div>
             </motion.nav>
