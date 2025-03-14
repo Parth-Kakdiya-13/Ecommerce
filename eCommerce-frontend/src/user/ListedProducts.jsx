@@ -37,7 +37,7 @@ export const ListedProducts = () => {
 
 
     return (
-        <div className=''>
+        <div className='mt-10 md:mt-0'>
             {error && <p>{error}</p>}
             <Headings caption="exlpore the awsome" heading="Our Various Collection" />
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mx-5">

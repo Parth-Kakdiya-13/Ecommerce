@@ -10,7 +10,7 @@ export const About = () => {
 
 
     return (
-        <div>
+        <div className='mt-10 md:mt-0'>
             <Headings caption="we are beleive in our customer satisfaction" heading="About Us" />
             <div className='flex justify-center gap-10 items-center px-20 max-[1100px]:flex-col'>
                 <img src={earinmodal} alt="" className='w-3/6 max-[1100px]:w-full  rounded-md' />
