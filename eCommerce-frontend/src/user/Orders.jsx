@@ -30,7 +30,7 @@ export const Orders = () => {
                                     </li>
                                     <li className='capitalize font-semibold'>{list.title}</li>
                                     <li className='capitalize text-gray-500 py-1'>{list.description}</li>
-                                    <li className='text-green-600 font-bold'>Rs. {list.price}</li>
+                                    <li className='text-teal-600 font-bold'>Rs. {list.price}</li>
                                     <li className='font-thin'>Quantity: <span className='font-normal'> {list.quantity}</span></li>
                                 </ul>
                             ))
@@ -42,8 +42,8 @@ export const Orders = () => {
                         Total Price: Rs. {orders.reduce((sum, order) => sum + order.totalAmount, 0)}
                     </p>
                     <div className='flex gap-2 justify-center items-center max-sm:flex-col'>
-                        <Button>Confirm Order</Button>
-                        <Button className="bg-gradient-to-r from-teal-400 to-yellow-200" onClick={cancelOrder}>Cancel Order</Button>
+                        <Button className="">Confirm Order</Button>
+                        <Button className="" onClick={cancelOrder}>Cancel Order</Button>
                     </div>
                 </div>
             ) : (

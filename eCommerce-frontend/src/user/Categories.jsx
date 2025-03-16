@@ -66,8 +66,8 @@ export const Categories = () => {
                                     <p className="text-gray-500">No image available</p>
                                 )}
                                 <div className='w-full py-5 flex justify-center mx-5 gap-2'>
-                                    <Button className="capitalize" onClick={() => moreDetails(list)}>More details</Button>
-                                    <Button className="bg-gradient-to-r from-teal-400 to-yellow-200" onClick={() => addItemsToCart(list)}>Add to cart</Button>
+                                    <Button className="" onClick={() => moreDetails(list)}>More details</Button>
+                                    <Button className="" onClick={() => addItemsToCart(list)}>Add to cart</Button>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@ export const Categories = () => {
                                         <div className='w-fit p-5 max-[780px]:p-0'>
                                             <h2 className="font-serif text-2xl capitalize">{list.title}</h2>
                                             <p className='text-gray-500 text-md py-5 capitalize'>{list.description}</p>
-                                            <p className='text-green-500 text-md'>Rs. {list.price}</p>
+                                            <p className='text-teal-600 text-md'>Rs. {list.price}</p>
                                         </div>
                                         <Button className="ml-auto max-[780px]:mt-5 capitalize " onClick={() => addItemsToCart(list)}>add to cart</Button>
                                     </div>

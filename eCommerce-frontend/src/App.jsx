@@ -17,13 +17,14 @@ import { Reset } from './admin/Reset';
 import { ResetPassword } from './admin/ResetPassword';
 import { Categories } from './user/Categories';
 import { OrderContextProvider } from './store/OrderContext';
+import VivoThemeUI from './test/Test';
 // Protected Route Component
 
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <NavigationBar />,
+    element: <VivoThemeUI />,
     children: [
       { path: '/', element: <HomePage /> },
       { path: 'shop', element: <ListedProducts /> },

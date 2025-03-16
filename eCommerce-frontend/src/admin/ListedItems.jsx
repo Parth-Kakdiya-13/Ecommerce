@@ -67,7 +67,7 @@ export const ListedItems = () => {
                             )}
                             <h2 className="font-semibold capitalize">{list.title}</h2>
                             <p className='w-48 capitalize'>{list.description}</p>
-                            <p className="text-green-600 font-bold">Rs. {list.price}</p>
+                            <p className="text-teal-600 font-bold">Rs. {list.price}</p>
                             <div className='flex items-center justify-between mt-auto pt-5'>
                                 <button type='button' className='capitalize px-5 rounded-md bg-black text-blue-500' onClick={() => editHandler(list._id)}>Edit</button>
                                 <button type='button' className='capitalize px-5 rounded-md bg-black text-red-500' onClick={() => deleteHandler(list._id)}>delete</button>

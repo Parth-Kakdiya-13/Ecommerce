@@ -162,7 +162,7 @@ export const EditPage = () => {
                 <div className="flex items-center justify-between mt-auto pt-5">
                     <button
                         type="button"
-                        className="capitalize px-5 rounded-md bg-black text-green-500"
+                        className="capitalize px-5 rounded-md bg-black text-teal-600"
                         onClick={editHandler}
                     >
                         Save

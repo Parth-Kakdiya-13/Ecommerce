@@ -44,11 +44,11 @@ export const Cart = () => {
                         </li>
                         <li className='capitalize font-semibold'>{list.title}</li>
                         <li className='capitalize text-gray-500  py-1'>{list.description}</li>
-                        <li className='text-green-600 font-bold'>Rs. {list.price}</li>
-                        <li className='flex gap-2 mt-2'>
+                        <li className='text-teal-600 font-bold'>Rs. {list.price}</li>
+                        <li className='flex gap-2 mt-2 items-center'>
                             <li>{list.quantity}</li>
-                            <button className='w-10 bg-yellow-500 rounded-xl flex items-center justify-center' onClick={() => addItemsHandler(list)}>+</button>
-                            <button className='w-10 bg-yellow-500 rounded-xl flex items-center justify-center' onClick={() => removeItemsHandler(list._id)}>-</button>
+                            <Button className='' onClick={() => addItemsHandler(list)}>+</Button>
+                            <Button className='' onClick={() => removeItemsHandler(list._id)}>-</Button>
                         </li>
                     </ul>
                 })}
@@ -56,8 +56,8 @@ export const Cart = () => {
             {items.length > 0 ? <p className='m-5 flex flex-col items-center'>
                 <p className='text-xl font-mono p-2 rounded-md w-fit bg-gray-200 mb-2'>Total Price: {totalAmount}</p>
                 <p className='flex gap-2'>
-                    <Button onClick={() => placeOrderHandler(items, totalAmount)}>Place Order</Button>
-                    <Button className="bg-gradient-to-r from-teal-400 to-yellow-200" onClick={cancelHandler}>Cancel</Button>
+                    <Button className="" onClick={() => placeOrderHandler(items, totalAmount)}>Place Order</Button>
+                    <Button className="" onClick={cancelHandler}>Cancel</Button>
                 </p>
             </p> : " "}
         </div>

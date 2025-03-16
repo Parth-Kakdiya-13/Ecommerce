@@ -84,10 +84,10 @@ export const NavigationBar = () => {
                 </ul>
                 <div className="flex items-center max-md:mt-5">
                     <Button
-                        className='ml-5text-md rounded-full flex gap-3 justify-center items-center'
+                        className='text-md bg-gradient-to-r from-teal-100 to-teal-500 text-black rounded-full flex gap-3 justify-center items-center'
                         onClick={showCartHandler}
                     >
-                        Cart <p className='w-5 h-5 flex items-center justify-center rounded-full bg-black'>{cartCtx.items.length}</p>
+                        Cart <p className='w-5 h-5 flex items-center justify-center rounded-full text-white bg-black'>{cartCtx.items.length}</p>
                     </Button>
 
                 </div>

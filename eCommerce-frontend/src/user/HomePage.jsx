@@ -22,7 +22,7 @@ export const HomePage = () => {
                     <h1 className='text-6xl py-5 max-md:text-4xl'>Smart Diamond<br /> Minimal Store</h1>
                     <p className='text-md'>Experienve your dacible like your deservs to. Safe for<br /> the ears, very for the heart, A treat you your years</p>
                     <div className='mt-10'>
-                        <Button className=' text-xl bg-gradient-to-r from-teal-400 to-yellow-200' onClick={navigateShop}>Explore more</Button>
+                        <Button className=' ' onClick={navigateShop}>Explore more</Button>
                     </div>
                 </div>
                 <img src={necless} className='max-md:w-1/3 max-sm:w-1/2' />
