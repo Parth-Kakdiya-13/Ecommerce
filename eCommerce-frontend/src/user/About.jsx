@@ -2,6 +2,7 @@ import React from 'react';
 import earinmodal from "../assets/model/earings.webp";
 import braclet from '../assets/model/braclet.webp'
 import { Headings } from '../components/Headings';
+import { motion } from 'framer-motion';
 
 export const About = () => {
 
@@ -11,11 +12,13 @@ export const About = () => {
 
     return (
         <div className='mt-10 md:mt-0'>
-            <Headings caption="we are beleive in our customer satisfaction" heading="About Us" />
+            <motion.div initial={{ x: -200, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 1, ease: "easeInOut", delay: 0.5 }}>
+                <Headings caption="we are beleive in our customer satisfaction" heading="About Us" />
+            </motion.div>
             <div className='flex justify-center gap-10 items-center px-20 max-[1100px]:flex-col'>
-                <img src={earinmodal} alt="" className='w-3/6 max-[1100px]:w-full  rounded-md' />
+                <motion.img initial={{ y: -200, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1, ease: "easeInOut" }} src={earinmodal} alt="" className='w-3/6 max-[1100px]:w-full  rounded-md' />
 
-                <div className='flex min-[1100px]:flex-col max-md:flex-col gap-5'>
+                <motion.div initial={{ y: 200, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1, ease: "easeInOut" }} className='flex min-[1100px]:flex-col max-md:flex-col gap-5'>
                     <div>
                         <h2 className={headings}>Hoop Earrings Collection</h2>
                         <p className={paragraph}>
@@ -31,10 +34,10 @@ export const About = () => {
                         </p>
                         <p className='text-yellow-500 font-thin'> Materials: Gold, Silver, Diamonds, Gemstones</p>
                     </div>
-                </div>
+                </motion.div>
             </div>
-            <div className='flex justify-center gap-10 items-center px-20 max-[1100px]:flex-col-reverse mt-20'>
-                <div className='flex min-[1100px]:flex max-md:flex gap-5'>
+            <motion.div className='flex justify-center gap-10 items-center px-20 max-[1100px]:flex-col-reverse mt-20'>
+                <motion.div initial={{ y: 200, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1, ease: "easeInOut" }} className='flex min-[1100px]:flex max-md:flex gap-5'>
                     <div>
                         <h2 className={headings}> Diamond Bracelets Collection</h2>
                         <p className={paragraph}>
@@ -42,9 +45,9 @@ export const About = () => {
                         </p>
                         <p className='text-yellow-500 font-thin'>Materials: 14K Gold, 18K White Gold, Platinum, Diamonds</p>
                     </div>
-                </div>
-                <img src={braclet} alt="" className='w-3/6 max-[1100px]:w-full  rounded-md' />
-            </div>
+                </motion.div>
+                <motion.img initial={{ y: -200, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1, ease: "easeInOut" }} src={braclet} alt="" className='w-3/6 max-[1100px]:w-full  rounded-md' />
+            </motion.div>
         </div>
     )
 }

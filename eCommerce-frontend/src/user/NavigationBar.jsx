@@ -17,6 +17,7 @@ export const NavigationBar = () => {
     const location = useLocation();
 
     const isActive = (path) => location.pathname === path;
+    console.log(isActive);
 
     function showCartHandler() {
         setBar(false)

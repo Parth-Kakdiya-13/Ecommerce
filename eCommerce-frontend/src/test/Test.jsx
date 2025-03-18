@@ -86,32 +86,32 @@ export default function VivoThemeUI() {
     ))
 } */}
                             <motion.li whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
+                                whileTap={{ scale: 0.5 }}
                                 onClick={() => setBar(false)}
-                                className={`px-6 py-2 cursor-pointer rounded-full flex items-center space-x-2 transition-all duration-500 ease-in-out hover:bg-yellow-500/50 ${isActive('/') ? 'bg-yellow-500/50' : ' '}`}>
+                                className={`px-6 py-2 cursor-pointer rounded-full flex items-center space-x-2 transition-all hover:bg-yellow-500/50 ${isActive('/about') ? 'bg-yellow-500/50' : ' '}`}>
                                 <Link to="/" className="capitalize">Home</Link>
                             </motion.li>
                             <motion.li whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
+                                whileTap={{ scale: 0.5 }}
                                 onClick={() => setBar(false)}
                                 className={`px-6 py-2 cursor-pointer rounded-full flex items-center space-x-2 transition-all hover:bg-yellow-500/50 ${isActive('/about') ? 'bg-yellow-500/50' : ' '}`}>
                                 <Link to="/about" className="capitalize">About</Link>
                             </motion.li>
                             <motion.li whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
+                                whileTap={{ scale: 0.5 }}
                                 onClick={() => setBar(false)}
                                 className={`px-6 py-2 cursor-pointer rounded-full flex items-center space-x-2 transition-all hover:bg-yellow-500/50 ${isActive('/shop') ? 'bg-yellow-500/50' : ' '}`}>
                                 <Link to="/shop" className="capitalize">Shop</Link>
                             </motion.li>
                             <motion.li whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
+                                whileTap={{ scale: 0.5 }}
                                 onClick={() => setBar(false)}
                                 className={`px-6 py-2 cursor-pointer rounded-full flex items-center space-x-2 transition-all hover:bg-yellow-500/50 ${isActive('/order') ? 'bg-yellow-500/50' : ' '}`}>
                                 <Link to="/order" className="capitalize">order</Link>
                             </motion.li>
                             {
                                 authCtx.isAuthenticated && <motion.li whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.9 }}
+                                    whileTap={{ scale: 0.5 }}
                                     onClick={() => setBar(false)}
                                     className={`px-6 py-2 cursor-pointer rounded-full flex items-center space-x-2 transition-all hover:bg-yellow-500/50 ${isActive('/admin/addProduct') ? 'bg-yellow-500/50' : ' '}`}>
                                     <Link to="/admin/addProduct" className="capitalize">Add Products</Link>
@@ -119,7 +119,7 @@ export default function VivoThemeUI() {
                             }
                             {
                                 authCtx.isAuthenticated && <motion.li whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.9 }}
+                                    whileTap={{ scale: 0.5 }}
                                     onClick={() => setBar(false)}
                                     className={`px-6 py-2 cursor-pointer rounded-full flex items-center space-x-2 transition-all hover:bg-yellow-500/50 ${isActive('/admin/products') ? 'bg-yellow-500/50' : ' '}`}>
                                     <Link to="/admin/products" className="capitalize">Products</Link>
@@ -127,7 +127,7 @@ export default function VivoThemeUI() {
                             }
                             {
                                 !authCtx.isAuthenticated && <motion.li whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.9 }}
+                                    whileTap={{ scale: 0.5 }}
                                     onClick={() => setBar(false)}
                                     className={`px-6 py-2 cursor-pointer rounded-full flex items-center space-x-2 transition-all hover:bg-yellow-500/50 ${isActive('/login') ? 'bg-yellow-500/50' : ' '}`}>
                                     <Link to="/login" className="capitalize">admin</Link>
@@ -135,7 +135,7 @@ export default function VivoThemeUI() {
                             }
                             {
                                 authCtx.isAuthenticated && <motion.li whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.9 }}
+                                    whileTap={{ scale: 0.5 }}
                                     onClick={() => setBar(false)}
                                     className={`px-6 py-2 cursor-pointer rounded-full flex items-center space-x-2 transition-all hover:bg-yellow-500/50 ${isActive('/login') ? 'bg-yellow-500/50' : ' '}`}>
                                     <button onClick={logout} className="capitalize">Logout</button>
@@ -143,7 +143,7 @@ export default function VivoThemeUI() {
                             }
                             <motion.button whileHover={{ scale: 1.1 }}
                                 onClick={showCartHandler}
-                                whileTap={{ scale: 0.9 }}
+                                whileTap={{ scale: 0.5 }}
                                 className={`px-6 py-2 cursor-pointer rounded-full flex items-center space-x-2 transition-all hover:bg-yellow-500/50 ${isActive('/cart') ? 'bg-yellow-500/50' : ' '}`}>
                                 <ShoppingCart size={24} />
                                 <p>{cartCtx.items.length}</p>
