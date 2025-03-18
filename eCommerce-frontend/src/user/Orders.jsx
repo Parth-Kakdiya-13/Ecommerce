@@ -27,7 +27,8 @@ export const Orders = () => {
         const encodedMessage = encodeURIComponent(message);
 
         // Open WhatsApp
-        window.open(`https://wa.me/9664642952?text=${encodedMessage}`, "_blank");
+        window.open(`https://wa.me/+91 91736 65599?text=${encodedMessage}`, "_blank");
+        setOrders([])
     };
 
     return (
