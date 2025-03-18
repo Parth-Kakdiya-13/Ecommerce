@@ -88,7 +88,7 @@ export default function VivoThemeUI() {
                             <motion.li whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.5 }}
                                 onClick={() => setBar(false)}
-                                className={`px-6 py-2 cursor-pointer rounded-full flex items-center space-x-2 transition-all hover:bg-yellow-500/50 ${isActive('/about') ? 'bg-yellow-500/50' : ' '}`}>
+                                className={`px-6 py-2 cursor-pointer rounded-full flex items-center space-x-2 transition-all hover:bg-yellow-500/50 ${isActive('/') ? 'bg-yellow-500/50' : ' '}`}>
                                 <Link to="/" className="capitalize">Home</Link>
                             </motion.li>
                             <motion.li whileHover={{ scale: 1.1 }}
