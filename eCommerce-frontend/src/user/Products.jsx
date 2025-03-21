@@ -58,7 +58,7 @@ export const Products = () => {
                                     <img
                                         src={`data:image/jpeg;base64,${list.image}`}
                                         alt={list.title}
-                                        className="w-full h-48 object-cover mb-4"
+                                        className="w-full h-96 object-cover mb-4"
                                     />
                                 ) : (
                                     <p className="text-gray-500">No image available</p>

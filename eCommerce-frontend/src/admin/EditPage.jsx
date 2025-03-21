@@ -11,15 +11,18 @@ export const EditPage = () => {
         image: null, // Store the file object
     });
     const [previewImage, setPreviewImage] = useState(null); // For previewing the uploaded image
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
 
     // Fetch the product details
     useEffect(() => {
+        setLoading(true)
         const fetchItem = async () => {
             try {
                 const response = await API.get(`/edit/${id}`);;
                 setProduct(response.data);
+                setLoading(false)
                 if (response.data.image) {
                     setPreviewImage(`data:image/jpeg;base64,${response.data.image}`); // Set initial preview
                 }
@@ -57,6 +60,7 @@ export const EditPage = () => {
 
     // Handle update
     async function editHandler() {
+        setLoading(true)
         try {
             const formData = new FormData();
             formData.append('title', product.title);
@@ -74,12 +78,14 @@ export const EditPage = () => {
             });
 
             if (response.status === 200) {
+                setLoading(false)
                 alert('Data updated successfully');
                 navigate('/admin/products'); // Redirect after successful update
             } else {
                 alert('Failed to update data');
             }
         } catch (error) {
+            setLoading(false)
             console.error('Error updating product:', error);
             alert('An error occurred while updating the product');
         }
@@ -87,9 +93,11 @@ export const EditPage = () => {
 
     // Handle delete
     async function deleteHandler() {
+        setLoading(true)
         try {
             const response = await API.delete(`/delete/${id}`);
             if (response.status === 200) {
+                setLoading(false)
                 alert('Data deleted successfully');
                 navigate('/admin/products');
             } else {
@@ -101,8 +109,12 @@ export const EditPage = () => {
         }
     }
 
+
     return (
         <div>
+            {loading && <div className='bg-black text-white  bg-opacity-50 flex justify-center place-self-center w-full h-screen fixed top-0 left-0 items-center'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24"><circle cx="12" cy="2" r="0" fill="currentColor"><animate attributeName="r" begin="0" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0" /></circle><circle cx="12" cy="2" r="0" fill="currentColor" transform="rotate(45 12 12)"><animate attributeName="r" begin="0.125s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0" /></circle><circle cx="12" cy="2" r="0" fill="currentColor" transform="rotate(90 12 12)"><animate attributeName="r" begin="0.25s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0" /></circle><circle cx="12" cy="2" r="0" fill="currentColor" transform="rotate(135 12 12)"><animate attributeName="r" begin="0.375s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0" /></circle><circle cx="12" cy="2" r="0" fill="currentColor" transform="rotate(180 12 12)"><animate attributeName="r" begin="0.5s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0" /></circle><circle cx="12" cy="2" r="0" fill="currentColor" transform="rotate(225 12 12)"><animate attributeName="r" begin="0.625s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0" /></circle><circle cx="12" cy="2" r="0" fill="currentColor" transform="rotate(270 12 12)"><animate attributeName="r" begin="0.75s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0" /></circle><circle cx="12" cy="2" r="0" fill="currentColor" transform="rotate(315 12 12)"><animate attributeName="r" begin="0.875s" calcMode="spline" dur="1s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0" /></circle></svg>
+            </div>}
             <div className="flex flex-col border p-4 rounded shadow-md w-fit h-fit">
                 {previewImage ? (
                     <img

@@ -60,7 +60,7 @@ export const Categories = () => {
                                     <img
                                         src={`data:image/jpeg;base64,${list.image}`}
                                         alt={list.title}
-                                        className="w-full h-48 object-cover mb-4"
+                                        className="w-52 h-fit object-cover mb-4"
                                     />
                                 ) : (
                                     <p className="text-gray-500">No image available</p>
@@ -94,7 +94,7 @@ export const Categories = () => {
                                         <img
                                             src={`data:image/jpeg;base64,${list.image}`}
                                             alt={list.title}
-                                            className="w-60 h-52 object-cover mb-4"
+                                            className="w-60 h-fit object-cover mb-4"
                                         />
 
                                     ) : (

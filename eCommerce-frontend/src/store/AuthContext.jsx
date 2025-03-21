@@ -24,10 +24,13 @@ export const AuthProvider = ({ children }) => {
             const res = await API.post('/admin/login', credential, { withCredentials: true });
 
             if (res.status === 200) {
+                alert("Login Successfull")
                 setUser(res.data.user);
                 setIsAuthenticated(true);
             }
         } catch (error) {
+            if (error.response.status === 401)
+                alert("Invalid Credentials")
             console.error("Login failed:", error);
         }
     }

@@ -26,7 +26,7 @@ export const Login = () => {
         event.preventDefault();
         try {
             await authCtx.login({ email: data.email, password: data.password })
-            alert("Login Successfull")
+            // alert("Login Successfull")
             navigate('/admin/addProduct')
         } catch (error) {
             if (error.response) {

@@ -47,7 +47,7 @@ export const ListedProducts = () => {
                         data.map((list, index) => (
                             <motion.div
                                 key={index}
-                                className="group flex flex-col items-center border rounded-md shadow-md w-fix h-fix max-sm:w-fit max-sm:mx-auto relative overflow-hidden"
+                                className="group flex flex-col items-center border rounded-md shadow-md w-fix h-fit max-sm:w-fit max-sm:mx-auto relative overflow-hidden"
                                 initial={{ opacity: 0, y: -50 }}  // Animation starts from above with opacity 0
                                 animate={{ opacity: 1, y: 0 }}    // Ends at normal position with full opacity
                                 transition={{ duration: 0.5, ease: "easeInOut", delay: index * 0.1 }} // Delay for stagger effect
@@ -62,7 +62,7 @@ export const ListedProducts = () => {
                                     <img
                                         src={`data:image/jpeg;base64,${list.image}`}
                                         alt={list.title}
-                                        className="w-full h-48 object-cover mb-4"
+                                        className="w-full h-fit  mb-4"
                                     />
                                 ) : (
                                     <p className="text-gray-500">No image available</p>
